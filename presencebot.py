@@ -150,7 +150,6 @@ if appid == str("fail"):
     quit()
 else:
     RPC = Presence(appid)
-
 root = tk.Tk()
 root.title("Discord RPC bot v1.03")
 root.minsize(512, 512)
