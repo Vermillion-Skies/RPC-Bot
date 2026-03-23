@@ -20,22 +20,29 @@ def getappid():
         pass
     pass
 def statcode(x, y):
-    if x == str("1"): #School status
-        if y == str("d"):
-            return("Empty details")
-            pass
-        elif y == str("s"):
-            return("Empty status")
-            pass
-        elif y == str("i"):
-            return("large image asset here")
+    if y == str("d"):
+        line = int(0)
+        pass
+    elif y == str("s"):
+        line = int(1)
+        pass
+    elif y == str("li"):
+        line = int(2)
+        pass
+    try:
+        with open("statuses/status" + str(x) + ".txt", "r") as file:
+            filelist = file.read().splitlines()
+            return(filelist[line])
             pass
         pass
+    except Exception as e:
+        print("Exception occurred: " + str(e))
+        quit()
     pass
 print("")
 print("#################")
 print("#Discord RPC bot#")
-print("#Version 1.01   #")
+print("#Version 1.02   #")
 print("#################")
 stat = str(input("Enter status code: "))
 appidl = getappid()
@@ -54,7 +61,7 @@ else:
             RPC.update(
                 details=statcode(stat, "d"),
                 state=statcode(stat, "s"),
-                large_image=statcode(stat, "i"),
+                large_image=statcode(stat, "li"),
                 #large_text="text to show when hovering over large image",
                 #small_image="asset name for small image",
                 #small_text="text to show when hovering over small image",
