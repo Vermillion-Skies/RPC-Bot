@@ -38,7 +38,7 @@ def statcode(x, y):
         line = int(2)
         pass
     try:
-        with open("statuses/" + str(x), "r") as file:
+        with open("./statuses/" + str(x), "r") as file:
             filelist = file.read().splitlines()
             return(filelist[line])
             pass
@@ -98,6 +98,7 @@ def CLI():
         pass
     pass
 def selection_changed(event):
+    global statusfile
     statusfile = event.widget.get()
     print(statusfile)
     fslabel.config(text=f"{event.widget.get()} selected!")
@@ -106,18 +107,50 @@ def selection_changed(event):
     fs3label.config(text=statcode(statusfile, "li"))
     pass
 def broadcaststart():
+    global broadstat
+    RPC.connect()
+    starttime = time.time()
+    broadstat = str("1")
+    winmade = str("n")
+    while broadstat == str("1"):
+        new_window = tk.Toplevel(root)
+        new_window.title("RPC running!")
+        new_window.geometry("300x200")
+        nwlabel1 = tk.Label(new_window, text="RPC now running!")
+        nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting")
+        nwlabel1.pack(padx=5, pady=5)
+        nwlabel2.pack(padx=5, pady=5)
+        nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend)
+        nwbutton.pack(padx=5, pady=5)
+        winmade = str("y")
+        try:
+            RPC.update(
+                details=statcode(statusfile, "d"),
+                state=statcode(statusfile, "s"),
+                large_image=statcode(statusfile, "li"),
+                #large_text="text to show when hovering over large image",
+                #small_image="asset name for small image",
+                #small_text="text to show when hovering over small image",
+                start=starttime,
+            )
+        except Exception:
+            quit()
+        root.mainloop()
+    pass
+def broadcastend():
+    root.destroy()
     pass
 def buttonclick():
-    global broadstat
-    if broadstat == str("n"):
-        broadcaststart()
-        broadstat = str("y")
-        pass
-    elif broadstat == str("y"):
-        broadstat = str("n")
-        pass
+    broadcaststart()
 filelist = os.listdir("./statuses")
-broadstat = str("n")
+statusfile = str("")
+appidl = getappid()
+appid = appidl[0]
+if appid == str("fail"):
+    quit()
+else:
+    RPC = Presence(appid)
+
 root = tk.Tk()
 root.title("Discord RPC bot v1.03")
 root.minsize(512, 512)
@@ -137,10 +170,8 @@ fs3label = tk.Label(root, text="")
 fs3label.pack(padx=5, pady=5, fill="x")
 button = tk.Button(
     root,
-    text="Start/stop status broadcast",
+    text="Start status broadcast",
     command=buttonclick,
 )
 button.pack(padx=5, pady=5)
-statlabel = tk.Label(root, text="Not broadcasting")
-statlabel.pack(padx=5, pady=5)
 root.mainloop()
