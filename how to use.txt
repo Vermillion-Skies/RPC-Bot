@@ -1,0 +1,19 @@
+--Extracting--
+1. Go to the releases page
+2. Download the latest release .zip file
+3. Extract this zip into its own folder preferably
+--Setting up the bot--
+1. Go to the discord developer portal and make a new app
+2. Name it whatever you want
+3. Find the application ID
+4. Open a text editor and put this app ID in a new text file
+5. Name this new file pbcred.txt and place it in the same directory as presencebot.py
+--Making statuses--
+1. Open the statuses directory
+2. Open statustemp.txt, this is a template for how to make a status file
+3. Using the template as a base, write out whatever you want
+4. Save the file as statusX.txt, with X being a number code that is unused by any other file in the directory
+--Using the app--
+1. Open a terminal with access to Python
+2. CD into the directory with the files
+3. Run presencebot.py
