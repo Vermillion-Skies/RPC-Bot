@@ -5,6 +5,13 @@ except Exception as e:
     print("Hint: You might not have the pypresence library installed!")
     print("You need that to run the script!")
     quit()
+try:
+    import tkinter as tk
+except Exception as e:
+    print("AN EXCEPTION HAS OCCURRED: " + str(e))
+    print("Hint: You might not have the tkinter library installed!")
+    print("You need that to run this program!")
+    quit()
 import time
 import os
 import sys
@@ -88,6 +95,8 @@ def CLI():
                 pass
             pass
         pass
+    pass
+def UI():
     pass
 print("")
 print("#################")
