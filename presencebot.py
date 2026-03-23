@@ -7,6 +7,7 @@ except Exception as e:
     quit()
 try:
     import tkinter as tk
+    from tkinter import ttk
 except Exception as e:
     print("AN EXCEPTION HAS OCCURRED: " + str(e))
     print("Hint: You might not have the tkinter library installed!")
@@ -37,7 +38,7 @@ def statcode(x, y):
         line = int(2)
         pass
     try:
-        with open("statuses/status" + str(x) + ".txt", "r") as file:
+        with open("statuses/" + str(x), "r") as file:
             filelist = file.read().splitlines()
             return(filelist[line])
             pass
@@ -96,21 +97,50 @@ def CLI():
             pass
         pass
     pass
-def UI():
-    root = tk.Tk()
-    root.title("Discord RPC bot v1.03")
-    root.configure(background="white")
-    root.minsize(512, 512)
-    root.mainloop()
-print("")
-print("#################")
-print("#Discord RPC bot#")
-print("#Version 1.02   #")
-print("#################")
-answer = str(input("CLI or UI? (c/u) "))
-if answer == str("c"):
-    CLI()
+def selection_changed(event):
+    statusfile = event.widget.get()
+    print(statusfile)
+    fslabel.config(text=f"{event.widget.get()} selected!")
+    fs1label.config(text=statcode(statusfile, "d"))
+    fs2label.config(text=statcode(statusfile, "s"))
+    fs3label.config(text=statcode(statusfile, "li"))
     pass
-elif answer == str("u"):
-    UI()
+def broadcaststart():
     pass
+def buttonclick():
+    global broadstat
+    if broadstat == str("n"):
+        broadcaststart()
+        broadstat = str("y")
+        pass
+    elif broadstat == str("y"):
+        broadstat = str("n")
+        pass
+filelist = os.listdir("./statuses")
+broadstat = str("n")
+root = tk.Tk()
+root.title("Discord RPC bot v1.03")
+root.minsize(512, 512)
+tk.Label(root, text="Discord RPC bot").pack()
+tk.Label(root, text="Version 1.03").pack()
+combobox = ttk.Combobox(root, values=filelist)
+combobox.set(filelist[0])
+combobox.bind("<<ComboboxSelected>>", selection_changed)
+combobox.pack(padx=5, pady=5, fill="x")
+fslabel = tk.Label(root, text="No status selected!")
+fslabel.pack(padx=5, pady=5, fill="x")
+fs1label = tk.Label(root, text="")
+fs1label.pack(padx=5, pady=5, fill="x")
+fs2label = tk.Label(root, text="")
+fs2label.pack(padx=5, pady=5, fill="x")
+fs3label = tk.Label(root, text="")
+fs3label.pack(padx=5, pady=5, fill="x")
+button = tk.Button(
+    root,
+    text="Start/stop status broadcast",
+    command=buttonclick,
+)
+button.pack(padx=5, pady=5)
+statlabel = tk.Label(root, text="Not broadcasting")
+statlabel.pack(padx=5, pady=5)
+root.mainloop()
