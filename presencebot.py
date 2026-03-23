@@ -97,7 +97,11 @@ def CLI():
         pass
     pass
 def UI():
-    pass
+    root = tk.Tk()
+    root.title("Discord RPC bot v1.03")
+    root.configure(background="white")
+    root.minsize(512, 512)
+    root.mainloop()
 print("")
 print("#################")
 print("#Discord RPC bot#")
@@ -107,6 +111,6 @@ answer = str(input("CLI or UI? (c/u) "))
 if answer == str("c"):
     CLI()
     pass
-elif answer == str(u):
+elif answer == str("u"):
     UI()
     pass
