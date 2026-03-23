@@ -47,56 +47,6 @@ def statcode(x, y):
         print("Exception occurred: " + str(e))
         quit()
     pass
-def CLI():
-    stat = str(input("Enter status code: "))
-    appidl = getappid()
-    appid = appidl[0]
-    if appid == str("fail"):
-        quit()
-    else:
-        RPC = Presence(appid)
-        RPC.connect()
-        print("Bot is starting, attempting to connect...")
-        botconn = str("y")
-        starttime = time.time()
-        conn = str("0")
-        while botconn == str("y"):
-            try:
-                RPC.update(
-                    details=statcode(stat, "d"),
-                    state=statcode(stat, "s"),
-                    large_image=statcode(stat, "li"),
-                    #large_text="text to show when hovering over large image",
-                    #small_image="asset name for small image",
-                    #small_text="text to show when hovering over small image",
-                    start=starttime,
-                )
-                if conn == str("1"):
-                    pass
-                else:
-                    print("Successfully connected!")
-                    conn = str("1")
-                    pass
-                pass
-            except Exception as e:
-                print("An exception has occurred: " + e)
-                botconn = str("n")
-                pass
-            time.sleep(15)
-            print("")
-            print(str(time.time()) + ": Bot has started and connected.")
-            a = str(input("Enter s to stop the bot, enter a code to change status, or do nothing to keep bot running as is. "))
-            if a == str("s"):
-                botconn = str("n")
-                pass
-            elif int(a) + int(0) > 0:
-                stat = str(a)
-                pass
-            else:
-                pass
-            pass
-        pass
-    pass
 def selection_changed(event):
     global statusfile
     statusfile = event.widget.get()
