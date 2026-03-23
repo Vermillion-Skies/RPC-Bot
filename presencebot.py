@@ -1,4 +1,10 @@
-from pypresence import Presence
+try:
+    from pypresence import Presence
+except Exception as e:
+    print("AN EXCEPTION HAS OCCURRED: " + e)
+    print("Hint: You might not have the pypresence library installed!")
+    print("You need that to run the script!")
+    quit()
 import time
 import os
 import sys
@@ -26,6 +32,11 @@ def statcode(x, y):
             pass
         pass
     pass
+print("")
+print("#################")
+print("#Discord RPC bot#")
+print("#Version 1.01   #")
+print("#################")
 stat = str(input("Enter status code: "))
 appidl = getappid()
 appid = appidl[0]
@@ -61,3 +72,16 @@ else:
             botconn = str("n")
             pass
         time.sleep(15)
+        print("")
+        print(str(time.time()) + ": Bot has started and connected.")
+        a = str(input("Enter s to stop the bot, enter a code to change status, or do nothing to keep bot running as is. "))
+        if a == str("s"):
+            botconn = str("n")
+            pass
+        elif int(a) + int(0) > 0:
+            stat = str(a)
+            pass
+        else:
+            pass
+        pass
+    pass
