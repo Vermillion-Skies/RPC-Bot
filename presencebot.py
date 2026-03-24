@@ -96,6 +96,9 @@ def broadcaststart():
             small_image=statcode(statusfile, "si"),
             small_text=statcode(statusfile, "st"),
             start=starttime,
+            buttons=[
+                {"label": "RPC-Bot by Vermillion-Skies", "url": "https://github.com/Vermillion-Skies/RPC-Bot"}
+            ],
         )
     except Exception:
         quit()
