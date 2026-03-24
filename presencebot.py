@@ -58,37 +58,39 @@ def selection_changed(event):
     pass
 def broadcaststart():
     global broadstat
+    global new_window
     RPC.connect()
     starttime = time.time()
     broadstat = str("1")
     winmade = str("n")
-    while broadstat == str("1"):
-        new_window = tk.Toplevel(root)
-        new_window.title("RPC running!")
-        new_window.geometry("300x200")
-        nwlabel1 = tk.Label(new_window, text="RPC now running!")
-        nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting")
-        nwlabel1.pack(padx=5, pady=5)
-        nwlabel2.pack(padx=5, pady=5)
-        nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend)
-        nwbutton.pack(padx=5, pady=5)
-        winmade = str("y")
-        try:
-            RPC.update(
-                details=statcode(statusfile, "d"),
-                state=statcode(statusfile, "s"),
-                large_image=statcode(statusfile, "li"),
-                #large_text="text to show when hovering over large image",
-                #small_image="asset name for small image",
-                #small_text="text to show when hovering over small image",
-                start=starttime,
-            )
-        except Exception:
-            quit()
-        root.mainloop()
+    new_window = tk.Toplevel(root)
+    new_window.title("RPC running!")
+    new_window.geometry("300x200")
+    nwlabel1 = tk.Label(new_window, text="RPC now running!")
+    nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting")
+    nwlabel1.pack(padx=5, pady=5)
+    nwlabel2.pack(padx=5, pady=5)
+    nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend)
+    nwbutton.pack(padx=5, pady=5)
+    try:
+        RPC.update(
+            details=statcode(statusfile, "d"),
+            state=statcode(statusfile, "s"),
+            large_image=statcode(statusfile, "li"),
+            #large_text="text to show when hovering over large image",
+            #small_image="asset name for small image",
+            #small_text="text to show when hovering over small image",
+            start=starttime,
+        )
+    except Exception:
+        quit()
+    root.mainloop()
     pass
 def broadcastend():
-    root.destroy()
+    global new_window
+    RPC.clear()
+    RPC.close()
+    new_window.destroy()
     pass
 def buttonclick():
     broadcaststart()
