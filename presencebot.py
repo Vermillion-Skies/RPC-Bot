@@ -49,7 +49,10 @@ def statcode(x, y):
     try:
         with open("./statuses/" + str(x), "r") as file:
             filelist = file.read().splitlines()
-            return(filelist[line])
+            if filelist[line] == str("null"):
+                pass
+            else:
+                return(filelist[line])
             pass
         pass
     except Exception as e:
@@ -92,7 +95,6 @@ def broadcaststart():
             large_text=statcode(statusfile, "lt"),
             small_image=statcode(statusfile, "si"),
             small_text=statcode(statusfile, "st"),
-            #party_size=[current, max],
             start=starttime,
         )
     except Exception:
