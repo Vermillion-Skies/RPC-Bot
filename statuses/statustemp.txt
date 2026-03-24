@@ -1,3 +1,6 @@
 Place details here (line 0)
 Place status here (line 1)
 Place large image asset name here (line 2)
+Place large image text here (line 3)
+Place small image asset name here (line 4)
+Place small image text here (line 5)
