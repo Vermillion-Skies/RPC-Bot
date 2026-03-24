@@ -12,7 +12,7 @@
 1. Open the statuses directory
 2. Open statustemp.txt, this is a template for how to make a status file
 3. Using the template as a base, write out whatever you want
-4. Save the file as statusX.txt, with X being a number code that is unused by any other file in the directory
+4. Save the file as a .txt file, using whatever name you wish
 --Using the app--
 1. Open a terminal with access to Python
 2. CD into the directory with the files
