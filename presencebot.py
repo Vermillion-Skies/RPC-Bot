@@ -37,6 +37,9 @@ def statcode(x, y):
     elif y == str("li"):
         line = int(2)
         pass
+    elif y == str("lt"):
+        line = int(3)
+        pass
     try:
         with open("./statuses/" + str(x), "r") as file:
             filelist = file.read().splitlines()
@@ -44,8 +47,11 @@ def statcode(x, y):
             pass
         pass
     except Exception as e:
-        print("Exception occurred: " + str(e))
-        quit()
+        if str(e) == "list index out of range":
+            pass
+        else:
+            print("Exception occurred: " + str(e))
+            quit()
     pass
 def selection_changed(event):
     global statusfile
@@ -77,7 +83,7 @@ def broadcaststart():
             details=statcode(statusfile, "d"),
             state=statcode(statusfile, "s"),
             large_image=statcode(statusfile, "li"),
-            #large_text="text to show when hovering over large image",
+            large_text=statcode(statusfile, "lt"),
             #small_image="asset name for small image",
             #small_text="text to show when hovering over small image",
             start=starttime,
