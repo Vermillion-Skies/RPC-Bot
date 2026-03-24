@@ -40,6 +40,12 @@ def statcode(x, y):
     elif y == str("lt"):
         line = int(3)
         pass
+    elif y == str("si"):
+        line = int(4)
+        pass
+    elif y == str("st"):
+        line = int(5)
+        pass
     try:
         with open("./statuses/" + str(x), "r") as file:
             filelist = file.read().splitlines()
@@ -84,8 +90,9 @@ def broadcaststart():
             state=statcode(statusfile, "s"),
             large_image=statcode(statusfile, "li"),
             large_text=statcode(statusfile, "lt"),
-            #small_image="asset name for small image",
-            #small_text="text to show when hovering over small image",
+            small_image=statcode(statusfile, "si"),
+            small_text=statcode(statusfile, "st"),
+            #party_size=[current, max],
             start=starttime,
         )
     except Exception:
