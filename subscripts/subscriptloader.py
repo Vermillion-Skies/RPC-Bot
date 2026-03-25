@@ -10,7 +10,9 @@ import os
 import sys
 import subprocess
 def ctbuttoncick():
-    pass #Function to load creation tool when clicking its button
+    root.destroy()
+    subprocess.run(["python", "subscripts/statmake.py"], check=True)
+    pass
 def exit():
     root.destroy()
     pass
