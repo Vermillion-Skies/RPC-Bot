@@ -35,7 +35,26 @@ def entrystdone(event):
     global entrylist
     entrylist[5] = event.widget.get()
     pass
-
+def inputrefresh():
+    global entrylist
+    try:
+        entryd.delete(0, 100)
+        entryd.insert(0, entrylist[0])
+        entrys.delete(0, 100)
+        entrys.insert(0, entrylist[1])
+        entryli.delete(0, 100)
+        entryli.insert(0, entrylist[2])
+        entrylt.delete(0, 100)
+        entrylt.insert(0, entrylist[3])
+        entrysi.delete(0, 100)
+        entrysi.insert(0, entrylist[4])
+        entryst.delete(0, 100)
+        entryst.insert(0, entrylist[5])
+    except Exception as e:
+        if str(e) == str("list index out of range"):
+            pass
+        else:
+            quit()
 def savefile():
     global fdwindow
     dir = filedialog.asksaveasfilename()
@@ -75,6 +94,7 @@ def openfile():
             entrylist = [line.strip() for line in file]
     except Exception as e:
         quit()
+    inputrefresh()
     pass #Function to open file dialog and ask for a file path
 entrylist = ["null", "null", "null", "null", "null", "null"]
 ver = str("1.00")
