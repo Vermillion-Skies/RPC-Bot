@@ -114,8 +114,8 @@ def broadcastend():
 def buttonclick():
     broadcaststart()
     pass
-def statmakebutton():
-    subprocess.run(["python", "subscripts/statmake.py"], check=True)
+def subscriptbutton():
+    subprocess.run(["python", "subscripts/subscriptloader.py"], check=True)
 filelist = os.listdir("./statuses")
 statusfile = str("")
 appidl = getappid()
@@ -149,8 +149,8 @@ button = tk.Button(
 button.pack(padx=5, pady=5)
 button2 = tk.Button(
     root,
-    text="Open status creation tool",
-    command=statmakebutton,
+    text="Subscripts...",
+    command=subscriptbutton,
 )
 button2.pack(padx=5, pady=5)
 root.mainloop()
