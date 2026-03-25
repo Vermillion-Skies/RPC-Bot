@@ -116,6 +116,9 @@ def buttonclick():
     pass
 def subscriptbutton():
     subprocess.run(["python", "subscripts/subscriptloader.py"], check=True)
+    pass
+def settings():
+    pass
 filelist = os.listdir("./statuses")
 statusfile = str("")
 appidl = getappid()
@@ -153,4 +156,10 @@ button2 = tk.Button(
     command=subscriptbutton,
 )
 button2.pack(padx=5, pady=5)
+button3 = tk.Button(
+    root,
+    text="settings",
+    command=settings,
+)
+button3.pack(padx=5, pady=5)
 root.mainloop()
