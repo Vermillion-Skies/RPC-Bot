@@ -23,9 +23,8 @@ def getappid():
             return(file.read().splitlines())
             pass
         pass
-    except:
-        print("Error getting app ID.")
-        return("fail")
+    except Exception as e:
+        errorwindow(e)
         pass
     pass
 def statcode(x, y):
@@ -101,9 +100,9 @@ def broadcaststart():
                 {"label": "RPC-Bot by Vermillion-Skies", "url": "https://github.com/Vermillion-Skies/RPC-Bot"}
             ],
         )
-    except Exception:
-        quit()
-    root.mainloop()
+    except Exception as e:
+        errorwindow(e)
+        pass
     pass
 def broadcastend():
     global new_window
@@ -144,6 +143,24 @@ def abtbutt():
     abtlab2.pack()
     abtlab3.pack()
     abtlab4.pack()
+    pass
+def errorwindow(x):
+    errwin = tk.Toplevel(root)
+    errwin.title("An error has occurred")
+    errwin.geometry("512x512")
+    errlab1 = tk.Label(errwin, text="An error has occurred and the program needs to close.")
+    errlab2 = tk.Label(errwin, text="Error is as follows: ")
+    errlab3 = tk.Label(errwin, text=str(x))
+    errlab4 = tk.Label(errwin, text="Please report this error to the Github issues page")
+    errlab5 = tk.Label(errwin, text="Press the button below to close the program.")
+    errbutt = tk.Button(
+        errwin,
+        text="Close",
+        command=killprogram
+    )
+    pass
+def killprogram():
+    root.destroy()
     pass
 filelist = os.listdir("./statuses")
 statusfile = str("")
