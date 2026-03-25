@@ -37,10 +37,22 @@ def savefile():
         quit()
     pass
 def openfile():
+    global statfile
+    global entrylist
+    statfile = filedialog.askopenfilename()
+    
     pass #Function to open file dialog and ask for a file path
 entrylist = ["null", "null", "null", "null", "null", "null"]
 ver = str("1.00")
+statfile = str("null")
 root = tk.Tk()
 root.title("Status edit tool v" + str(ver))
 root.minsize(720, 720)
+tk.Label(root, text="Status edit tool").pack()
+fileopenbutt = tk.Button(
+    root,
+    text="Open file",
+    command=openfile
+)
+fileopenbutt.pack()
 root.mainloop()
