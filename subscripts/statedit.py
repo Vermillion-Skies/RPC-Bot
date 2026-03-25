@@ -39,4 +39,8 @@ def savefile():
 def openfile():
     pass #Function to open file dialog and ask for a file path
 entrylist = ["null", "null", "null", "null", "null", "null"]
+ver = str("1.00")
 root = tk.Tk()
+root.title("Status edit tool v" + str(ver))
+root.minsize(720, 720)
+root.mainloop()
