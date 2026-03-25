@@ -47,6 +47,18 @@ def resetbutton():
     entrylist = ["null", "null", "null", "null", "null", "null"]
     entryd.delete(0, 100)
     entryd.insert(0, "Enter details")
+    entrys.delete(0, 100)
+    entrys.insert(0, "Enter status")
+    entryli.delete(0, 100)
+    entryli.insert(0, "Enter large image asset")
+    entrylt.delete(0, 100)
+    entrylt.insert(0, "Enter large image text")
+    entrysi.delete(0, 100)
+    entrysi.insert(0, "Enter small image asset")
+    entryst.delete(0, 100)
+    entryst.insert(0, "Enter small image text")
+    entryn.delete(0, 100)
+    entryn.insert(0, "Enter file name")
     pass
 def close():
     root.destroy()
