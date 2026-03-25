@@ -10,3 +10,25 @@ except Exception as e:
     quit()
 import os
 import sys
+def savefile():
+    pass
+def close():
+    root.destroy()
+    pass
+root = tk.Tk()
+root.title("Status creation tool v1.00")
+root.minsize(720, 720)
+tk.Label(root, text="Status creation tool").pack()
+buttonsave = tk.Button(
+    root,
+    text="Save status as...",
+    command=savefile,
+)
+buttonsave.pack()
+buttonclose = tk.Button(
+    root,
+    text="Close tool",
+    command=close,
+)
+buttonclose.pack()
+root.mainloop()
