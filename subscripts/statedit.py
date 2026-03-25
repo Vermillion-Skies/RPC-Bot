@@ -13,11 +13,11 @@ import os
 import sys
 def savefile():
     global fdwindow
-    dir = filedialog.askdirectory()
+    dir = filedialog.asksaveasfilename()
     try:
-        with open(str(dir) + "/" + str(name) + ".txt", "w") as f:
+        with open(str(dir) + ".txt", "w") as f:
             pass
-        with open(str(dir) + "/" + str(name) + ".txt", "w") as file:
+        with open(str(dir) + ".txt", "w") as file:
             file.write("\n".join(entrylist))
             pass
         fdwindow = tk.Toplevel(root)
