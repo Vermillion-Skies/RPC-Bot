@@ -40,7 +40,12 @@ def openfile():
     global statfile
     global entrylist
     statfile = filedialog.askopenfilename()
-    
+    entrylist = []
+    try:
+        with open(statfile, "r") as file:
+            entrylist = [line.strip() for line in file]
+    except Exception as e:
+        quit()
     pass #Function to open file dialog and ask for a file path
 entrylist = ["null", "null", "null", "null", "null", "null"]
 ver = str("1.00")
