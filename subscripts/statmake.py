@@ -13,7 +13,17 @@ import os
 import sys
 def savefile():
     dir = filedialog.askdirectory()
-    
+    try:
+        with open(str(dir) + "/" + str(name) + ".txt", "w") as f:
+            pass
+        with open(str(dir) + "/" + str(name) + ".txt", "w") as file:
+            file.write("\n".join(entrylist))
+            pass
+        
+        pass
+    except Exception as e:
+        print("Exception " + str(e) + " has occurred.")
+        quit()
     pass
 def close():
     root.destroy()
