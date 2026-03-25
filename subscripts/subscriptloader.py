@@ -13,6 +13,10 @@ def ctbuttoncick():
     root.destroy()
     subprocess.run(["python", "subscripts/statmake.py"], check=True)
     pass
+def smbuttonclick():
+    root.destroy()
+    subprocess.run(["python", "subscripts/statedit.py"], check=True)
+    pass
 def exit():
     root.destroy()
     pass
@@ -25,6 +29,12 @@ statmakebutton = tk.Button(
     command=ctbuttoncick,
 )
 statmakebutton.pack()
+stateditbutton = tk.Button(
+    root,
+    text="Status editing tool",
+    command=smbuttonclick,
+)
+stateditbutton.pack()
 exitbutton = tk.Button(
     root,
     text="Exit",
