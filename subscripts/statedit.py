@@ -168,4 +168,10 @@ entryst = tk.Entry(root)
 entryst.insert(0, "File not loaded")
 entryst.bind("<Return>", entrystdone)
 entryst.pack()
+filesave = tk.Button(
+    root,
+    text="Save file as...",
+    command=savefile
+)
+filesave.pack()
 root.mainloop()
