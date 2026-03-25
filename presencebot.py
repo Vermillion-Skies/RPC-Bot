@@ -59,8 +59,7 @@ def statcode(x, y):
         if str(e) == "list index out of range":
             pass
         else:
-            print("Exception occurred: " + str(e))
-            quit()
+            errorwindow(e)
     pass
 def selection_changed(event):
     global statusfile
