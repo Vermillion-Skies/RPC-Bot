@@ -16,6 +16,7 @@ except Exception as e:
 import time
 import os
 import sys
+import subprocess
 def getappid():
     try:
         with open("pbcred.txt", "r") as file:
@@ -112,6 +113,9 @@ def broadcastend():
     pass
 def buttonclick():
     broadcaststart()
+    pass
+def statmakebutton():
+    subprocess.run(["python", "subscripts/statmake.py"], check=True)
 filelist = os.listdir("./statuses")
 statusfile = str("")
 appidl = getappid()
@@ -143,4 +147,10 @@ button = tk.Button(
     command=buttonclick,
 )
 button.pack(padx=5, pady=5)
+button2 = tk.Button(
+    root,
+    text="Open status creation tool",
+    command=statmakebutton,
+)
+button2.pack(padx=5, pady=5)
 root.mainloop()
