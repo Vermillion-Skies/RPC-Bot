@@ -125,10 +125,10 @@ if appid == str("fail"):
 else:
     RPC = Presence(appid)
 root = tk.Tk()
-root.title("Discord RPC bot v1.03")
+root.title("Discord RPC bot v1.05")
 root.minsize(512, 512)
 tk.Label(root, text="Discord RPC bot").pack()
-tk.Label(root, text="Version 1.04").pack()
+tk.Label(root, text="Version 1.05").pack()
 combobox = ttk.Combobox(root, values=filelist)
 combobox.set(filelist[0])
 combobox.bind("<<ComboboxSelected>>", selection_changed)
