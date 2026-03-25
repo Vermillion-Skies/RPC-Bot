@@ -57,8 +57,6 @@ def resetbutton():
     entrysi.insert(0, "Enter small image asset")
     entryst.delete(0, 100)
     entryst.insert(0, "Enter small image text")
-    entryn.delete(0, 100)
-    entryn.insert(0, "Enter file name")
     pass
 def close():
     root.destroy()
@@ -87,12 +85,6 @@ def entrystdone(event):
     global entrylist
     entrylist[5] = event.widget.get()
     pass
-def entrynamedone(event):
-    global name
-    name = str(event.widget.get())
-    print(name)
-    pass
-name = str("null")
 entrylist = ["null", "null", "null", "null", "null", "null"]
 ver = str("1.00")
 root = tk.Tk()
@@ -123,10 +115,6 @@ entryst = tk.Entry(root)
 entryst.insert(0, "Enter small image text")
 entryst.bind("<Return>", entrystdone)
 entryst.pack()
-entryn = tk.Entry(root)
-entryn.insert(0, "Enter file name")
-entryn.bind("<Return>", entrynamedone)
-entryn.pack()
 buttonsave = tk.Button(
     root,
     text="Save status as...",
