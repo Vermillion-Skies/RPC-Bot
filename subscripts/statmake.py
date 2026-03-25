@@ -12,6 +12,7 @@ except Exception as e:
 import os
 import sys
 def savefile():
+    global fdwindow
     dir = filedialog.askdirectory()
     try:
         with open(str(dir) + "/" + str(name) + ".txt", "w") as f:
@@ -19,11 +20,33 @@ def savefile():
         with open(str(dir) + "/" + str(name) + ".txt", "w") as file:
             file.write("\n".join(entrylist))
             pass
-        
+        fdwindow = tk.Toplevel(root)
+        fdwindow.title("File save success!")
+        fdwindow.geometry("300x200")
+        fdlabel = tk.Label(fdwindow, text="File has been successfully saved!")
+        fdlabel.pack(padx=5, pady=5)
+        fdbutton = tk.Button(
+            fdwindow,
+            text="Okay!",
+            command=closefdw,
+        )
+        fdbutton.pack(padx=5, pady=5)
         pass
     except Exception as e:
         print("Exception " + str(e) + " has occurred.")
         quit()
+    pass
+def closefdw():
+    global fdwindow
+    fdwindow.destroy()
+    pass
+def resetbutton():
+    global name
+    global entrylist
+    name = str("null")
+    entrylist = ["null", "null", "null", "null", "null", "null"]
+    entryd.delete(0, 100)
+    entryd.insert(0, "Enter details")
     pass
 def close():
     root.destroy()
@@ -103,4 +126,10 @@ buttonclose = tk.Button(
     command=close,
 )
 buttonclose.pack()
+buttonreset = tk.Button(
+    root,
+    text="reset",
+    command=resetbutton,
+)
+buttonreset.pack()
 root.mainloop()
