@@ -118,6 +118,19 @@ def subscriptbutton():
     subprocess.run(["python", "subscripts/subscriptloader.py"], check=True)
     pass
 def settings():
+    setwin = tk.Toplevel(root)
+    setwin.title("RPC Bot settings")
+    setwin.geometry("300x200")
+    setlab = tk.Label(setwin, text="Settings coming soon!")
+    setlab.pack(padx=5, pady=5)
+    setbut = tk.Button(
+        setwin,
+        text="About Script",
+        command=abtbutt,
+    )
+    setbut.pack(padx=5, pady=5)
+    pass
+def abtbutt():
     pass
 filelist = os.listdir("./statuses")
 statusfile = str("")
@@ -158,7 +171,7 @@ button2 = tk.Button(
 button2.pack(padx=5, pady=5)
 button3 = tk.Button(
     root,
-    text="settings",
+    text="Settings",
     command=settings,
 )
 button3.pack(padx=5, pady=5)
