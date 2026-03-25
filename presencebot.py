@@ -170,7 +170,7 @@ if appid == str("fail"):
 else:
     RPC = Presence(appid)
 botver = str("1.06")
-subsver = str("1.01")
+subsver = str("1.02")
 root = tk.Tk()
 root.title("Discord RPC bot v" + str(botver))
 root.minsize(512, 512)
