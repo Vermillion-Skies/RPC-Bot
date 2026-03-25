@@ -16,7 +16,10 @@ def close():
     root.destroy()
     pass
 def entryddone(event):
-    print(event.widget.get())
+    global entrylist
+    entrylist[0] = event.widget.get()
+    pass
+entrylist = ["null", "null", "null", "null", "null", "null"]
 root = tk.Tk()
 root.title("Status creation tool v1.00")
 root.minsize(720, 720)
