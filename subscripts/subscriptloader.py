@@ -11,3 +11,22 @@ import sys
 import subprocess
 def ctbuttoncick():
     pass #Function to load creation tool when clicking its button
+def exit():
+    root.destroy()
+    pass
+root = tk.Tk()
+root.title("Subscript loader")
+root.minsize(512, 512)
+statmakebutton = tk.Button(
+    root,
+    text="Status creation tool",
+    command=ctbuttoncick,
+)
+statmakebutton.pack()
+exitbutton = tk.Button(
+    root,
+    text="Exit",
+    command=exit,
+)
+exitbutton.pack()
+root.mainloop()
