@@ -118,6 +118,7 @@ def subscriptbutton():
     subprocess.run(["python", "subscripts/subscriptloader.py"], check=True)
     pass
 def settings():
+    global setwin
     setwin = tk.Toplevel(root)
     setwin.title("RPC Bot settings")
     setwin.geometry("300x200")
@@ -131,6 +132,18 @@ def settings():
     setbut.pack(padx=5, pady=5)
     pass
 def abtbutt():
+    global setwin
+    abtwin = tk.Toplevel(setwin)
+    abtwin.title("About")
+    abtwin.geometry("300x200")
+    abtlab1 = tk.Label(abtwin, text="RPC Bot script (GUI)")
+    abtlab2 = tk.Label(abtwin, text="Bot version " + str(botver))
+    abtlab3 = tk.Label(abtwin, text="Subscript library version " + str(subsver))
+    abtlab4 = tk.Label(abtwin, text="Developed by Vermillion-Skies on Github")
+    abtlab1.pack()
+    abtlab2.pack()
+    abtlab3.pack()
+    abtlab4.pack()
     pass
 filelist = os.listdir("./statuses")
 statusfile = str("")
@@ -140,11 +153,13 @@ if appid == str("fail"):
     quit()
 else:
     RPC = Presence(appid)
+botver = str("1.06")
+subsver = str("1.01")
 root = tk.Tk()
-root.title("Discord RPC bot v1.05")
+root.title("Discord RPC bot v" + str(botver))
 root.minsize(512, 512)
 tk.Label(root, text="Discord RPC bot").pack()
-tk.Label(root, text="Version 1.05").pack()
+tk.Label(root, text="Version " + str(botver)).pack()
 combobox = ttk.Combobox(root, values=filelist)
 combobox.set(filelist[0])
 combobox.bind("<<ComboboxSelected>>", selection_changed)
