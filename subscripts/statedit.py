@@ -36,6 +36,10 @@ def savefile():
         print("Exception " + str(e) + " has occurred.")
         quit()
     pass
+def closefdw():
+    global fdwindow
+    fdwindow.destroy()
+    pass
 def openfile():
     global statfile
     global entrylist
