@@ -1,5 +1,6 @@
 try:
     import tkinter as tk
+    from tkinter import filedialog
     from tkinter import ttk
 except Exception as e:
     print("AN EXCEPTION HAS OCCURRED: " + str(e))
@@ -11,6 +12,8 @@ except Exception as e:
 import os
 import sys
 def savefile():
+    dir = filedialog.askdirectory()
+    
     pass
 def close():
     root.destroy()
@@ -39,6 +42,12 @@ def entrystdone(event):
     global entrylist
     entrylist[5] = event.widget.get()
     pass
+def entrynamedone(event):
+    global name
+    name = str(event.widget.get())
+    print(name)
+    pass
+name = str("null")
 entrylist = ["null", "null", "null", "null", "null", "null"]
 root = tk.Tk()
 root.title("Status creation tool v1.00")
@@ -68,7 +77,10 @@ entryst = tk.Entry(root)
 entryst.insert(0, "Enter small image text")
 entryst.bind("<Return>", entrystdone)
 entryst.pack()
-
+entryn = tk.Entry(root)
+entryn.insert(0, "Enter file name")
+entryn.bind("<Return>", entrynamedone)
+entryn.pack()
 buttonsave = tk.Button(
     root,
     text="Save status as...",
