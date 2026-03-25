@@ -11,6 +11,31 @@ except Exception as e:
     quit()
 import os
 import sys
+def entryddone(event):
+    global entrylist
+    entrylist[0] = event.widget.get()
+    pass
+def entrysdone(event):
+    global entrylist
+    entrylist[1] = event.widget.get()
+    pass
+def entrylidone(event):
+    global entrylist
+    entrylist[2] = event.widget.get()
+    pass
+def entryltdone(event):
+    global entrylist
+    entrylist[3] = event.widget.get()
+    pass
+def entrysidone(event):
+    global entrylist
+    entrylist[4] = event.widget.get()
+    pass
+def entrystdone(event):
+    global entrylist
+    entrylist[5] = event.widget.get()
+    pass
+
 def savefile():
     global fdwindow
     dir = filedialog.asksaveasfilename()
@@ -64,4 +89,28 @@ fileopenbutt = tk.Button(
     command=openfile
 )
 fileopenbutt.pack()
+entryd = tk.Entry(root)
+entryd.insert(0, "File not loaded")
+entryd.bind("<Return>", entryddone)
+entryd.pack()
+entrys = tk.Entry(root)
+entrys.insert(0, "File not loaded")
+entrys.bind("<Return>", entrysdone)
+entrys.pack()
+entryli = tk.Entry(root)
+entryli.insert(0, "File not loaded")
+entryli.bind("<Return>", entrylidone)
+entryli.pack()
+entrylt = tk.Entry(root)
+entrylt.insert(0, "File not loaded")
+entrylt.bind("<Return>", entryltdone)
+entrylt.pack()
+entrysi = tk.Entry(root)
+entrysi.insert(0, "File not loaded")
+entrysi.bind("<Return>", entrysidone)
+entrysi.pack()
+entryst = tk.Entry(root)
+entryst.insert(0, "File not loaded")
+entryst.bind("<Return>", entrystdone)
+entryst.pack()
 root.mainloop()
