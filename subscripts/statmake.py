@@ -15,10 +15,16 @@ def savefile():
 def close():
     root.destroy()
     pass
+def entryddone(event):
+    print(event.widget.get())
 root = tk.Tk()
 root.title("Status creation tool v1.00")
 root.minsize(720, 720)
 tk.Label(root, text="Status creation tool").pack()
+entryd = tk.Entry(root)
+entryd.insert(0, "enter text")
+entryd.bind("<Return>", entryddone)
+entryd.pack()
 buttonsave = tk.Button(
     root,
     text="Save status as...",
