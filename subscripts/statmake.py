@@ -13,11 +13,11 @@ import os
 import sys
 def savefile():
     global fdwindow
-    dir = filedialog.askdirectory()
+    dir = filedialog.asksaveasfilename()
     try:
-        with open(str(dir) + "/" + str(name) + ".txt", "w") as f:
+        with open(str(dir) + ".txt", "w") as f:
             pass
-        with open(str(dir) + "/" + str(name) + ".txt", "w") as file:
+        with open(str(dir) + ".txt", "w") as file:
             file.write("\n".join(entrylist))
             pass
         fdwindow = tk.Toplevel(root)
@@ -86,7 +86,7 @@ def entrystdone(event):
     entrylist[5] = event.widget.get()
     pass
 entrylist = ["null", "null", "null", "null", "null", "null"]
-ver = str("1.00")
+ver = str("1.01")
 root = tk.Tk()
 root.title("Status creation tool v" + str(ver))
 root.minsize(720, 720)
