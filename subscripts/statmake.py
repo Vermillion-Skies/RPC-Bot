@@ -94,8 +94,9 @@ def entrynamedone(event):
     pass
 name = str("null")
 entrylist = ["null", "null", "null", "null", "null", "null"]
+ver = str("1.00")
 root = tk.Tk()
-root.title("Status creation tool v1.00")
+root.title("Status creation tool v " + str(ver))
 root.minsize(720, 720)
 tk.Label(root, text="Status creation tool").pack()
 entryd = tk.Entry(root)
