@@ -37,6 +37,8 @@ def entrystdone(event):
     pass
 def inputrefresh():
     global entrylist
+    global statfile
+    filelabel.config(text="Opened file " + str(statfile))
     try:
         entryd.delete(0, 100)
         entryd.insert(0, entrylist[0])
@@ -109,6 +111,8 @@ fileopenbutt = tk.Button(
     command=openfile
 )
 fileopenbutt.pack()
+filelabel = tk.Label(root, text="No file opened")
+filelabel.pack()
 entryd = tk.Entry(root)
 entryd.insert(0, "File not loaded")
 entryd.bind("<Return>", entryddone)
