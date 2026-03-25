@@ -42,14 +42,44 @@ def inputrefresh():
     try:
         entryd.delete(0, 100)
         entryd.insert(0, entrylist[0])
+    except Exception as e:
+        if str(e) == str("list index out of range"):
+            pass
+        else:
+            quit()
+    try:
         entrys.delete(0, 100)
         entrys.insert(0, entrylist[1])
+    except Exception as e:
+        if str(e) == str("list index out of range"):
+            pass
+        else:
+            quit()
+    try:
         entryli.delete(0, 100)
         entryli.insert(0, entrylist[2])
+    except Exception as e:
+        if str(e) == str("list index out of range"):
+            pass
+        else:
+            quit()
+    try:
         entrylt.delete(0, 100)
         entrylt.insert(0, entrylist[3])
+    except Exception as e:
+        if str(e) == str("list index out of range"):
+            pass
+        else:
+            quit()
+    try:
         entrysi.delete(0, 100)
         entrysi.insert(0, entrylist[4])
+    except Exception as e:
+        if str(e) == str("list index out of range"):
+            pass
+        else:
+            quit()
+    try:
         entryst.delete(0, 100)
         entryst.insert(0, entrylist[5])
     except Exception as e:
@@ -57,6 +87,7 @@ def inputrefresh():
             pass
         else:
             quit()
+    pass
 def savefile():
     global fdwindow
     dir = filedialog.asksaveasfilename()
