@@ -115,7 +115,7 @@ def broadcaststart(): #Begins broadcasting to Discord
         errorwindow(e)
         pass
     pass
-def broadcastend():
+def broadcastend(): #Ends the RPC broadcast
     global new_window
     consout("Ending RPC...")
     RPC.clear() #Clears activity in Discord
