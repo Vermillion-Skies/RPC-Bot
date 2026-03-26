@@ -177,9 +177,9 @@ def errorwindow(x): #Error catcher
         command=killprogram
     )
     pass
-def killprogram():
+def killprogram(): #Kills the program
     consout("Killing program...")
-    root.destroy()
+    root.destroy() #Destroys root window, killing the app process
     pass
 def startconsoleout():
     print("Vermillion RPC bot")
