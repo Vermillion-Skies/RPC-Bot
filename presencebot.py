@@ -187,17 +187,17 @@ def startconsoleout(): #Prints in the console for troubleshooting
 def consout(x): #Outputs time and a string to the console
     print("[" + str(fetchtime("h")) + ":" + str(fetchtime("m")) + ":" + str(fetchtime("s")) + "] - " + str(x))
     pass
-def fetchtime(x):
+def fetchtime(x): #Fetches the time in a readable format
     currenttime = time.time()
     localtime = time.localtime(currenttime)
     if x == "h":
-        return(localtime.tm_hour)
+        return(localtime.tm_hour) #Returns the hour
         pass
     elif x == "m":
-        return(localtime.tm_min)
+        return(localtime.tm_min) #Returns the minute
         pass
     elif x == "s":
-        return(localtime.tm_sec)
+        return(localtime.tm_sec) #Returns the second
     pass
 startconsoleout()
 filelist = os.listdir("./statuses")
