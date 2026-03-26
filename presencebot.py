@@ -161,14 +161,14 @@ def abtbutt(): #Opens about window
     abtlab3.pack()
     abtlab4.pack()
     pass
-def errorwindow(x):
+def errorwindow(x): #Error catcher
     errwin = tk.Toplevel(root)
     consout("Opening exception handler...")
-    errwin.title("An error has occurred")
+    errwin.title("An error has occurred") #Creates error window
     errwin.geometry("512x512")
     errlab1 = tk.Label(errwin, text="An error has occurred and the program needs to close.")
     errlab2 = tk.Label(errwin, text="Error is as follows: ")
-    errlab3 = tk.Label(errwin, text=str(x))
+    errlab3 = tk.Label(errwin, text=str(x)) #Prints exception
     errlab4 = tk.Label(errwin, text="Please report this error to the Github issues page")
     errlab5 = tk.Label(errwin, text="Press the button below to close the program.")
     errbutt = tk.Button(
