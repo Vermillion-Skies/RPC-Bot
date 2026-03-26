@@ -127,9 +127,9 @@ def broadcastend(): #Ends the RPC broadcast
 def buttonclick(): #Starts the broadcast when button clicked
     broadcaststart()
     pass
-def subscriptbutton():
+def subscriptbutton(): #Launches subscript loader when button clicked
     consout("Opening subscript launcher...")
-    subprocess.run(["python", "subscripts/subscriptloader.py"], check=True)
+    subprocess.run(["python", "subscripts/subscriptloader.py"], check=True) #Loads subscriptloader.py
     pass
 def settings():
     global setwin
