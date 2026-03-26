@@ -117,8 +117,11 @@ def broadcaststart():
     pass
 def broadcastend():
     global new_window
+    consout("Ending RPC...")
     RPC.clear()
+    consout("Activity cleared")
     RPC.close()
+    consout("Endpoint closed")
     new_window.destroy()
     pass
 def buttonclick():
