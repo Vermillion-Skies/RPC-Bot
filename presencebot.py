@@ -181,7 +181,7 @@ def killprogram(): #Kills the program
     consout("Killing program...")
     root.destroy() #Destroys root window, killing the app process
     pass
-def startconsoleout():
+def startconsoleout(): #Prints in the console for troubleshooting
     print("Vermillion RPC bot")
     pass
 def consout(x):
