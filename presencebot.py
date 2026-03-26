@@ -72,19 +72,19 @@ def selection_changed(event): #Changes labels and enables button when dropdown b
     fs3label.config(text=statcode(statusfile, "li"))
     button.config(state=tk.NORMAL) #Enables the broadcast button
     pass
-def broadcaststart():
+def broadcaststart(): #Begins broadcasting to Discord
     global broadstat
     global new_window
     consout("Starting RPC connection")
     consout("Attempting to open endpoint...")
     try:
-        RPC.connect()
+        RPC.connect() #Attempts to connect to the RPC endpoint
         consout("Endpoint connected")
         pass
     except Exception as e:
         errorwindow(e)
         pass
-    starttime = time.time()
+    starttime = time.time() #Sets starttime to the current time in seconds
     consout("Activity start time set to " + str(starttime))
     broadstat = str("1")
     winmade = str("n")
@@ -97,7 +97,7 @@ def broadcaststart():
     nwlabel2.pack(padx=5, pady=5)
     nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend)
     nwbutton.pack(padx=5, pady=5)
-    try:
+    try: #Updates activity in Discord with file contents
         RPC.update(
             details=statcode(statusfile, "d"),
             state=statcode(statusfile, "s"),
@@ -106,7 +106,7 @@ def broadcaststart():
             small_image=statcode(statusfile, "si"),
             small_text=statcode(statusfile, "st"),
             start=starttime,
-            buttons=[
+            buttons=[ #button that leads to the bot source code
                 {"label": "RPC-Bot by Vermillion-Skies", "url": "https://github.com/Vermillion-Skies/RPC-Bot"}
             ],
         )
@@ -118,11 +118,11 @@ def broadcaststart():
 def broadcastend():
     global new_window
     consout("Ending RPC...")
-    RPC.clear()
+    RPC.clear() #Clears activity in Discord
     consout("Activity cleared")
-    RPC.close()
+    RPC.close() #Closes endpoint
     consout("Endpoint closed")
-    new_window.destroy()
+    new_window.destroy() #Destroys the broadcast window
     pass
 def buttonclick():
     broadcaststart()
