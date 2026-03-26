@@ -200,19 +200,19 @@ def fetchtime(x): #Fetches the time in a readable format
         return(localtime.tm_sec) #Returns the second
     pass
 startconsoleout()
-filelist = os.listdir("./statuses")
+filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
-statusfile = str("")
-appidl = getappid()
-appid = appidl[0]
-if appid == str("fail"):
+statusfile = str("") #Blanks out the statusfile variable
+appidl = getappid() #Gets the appID in a list
+appid = appidl[0] #Obtains the appID from the list
+if appid == str("fail"): #Quits if the ID fetch fails
     quit()
 else:
-    RPC = Presence(appid)
+    RPC = Presence(appid) #Sets RPC to run the Presence function using the app ID as a variable
     consout("Application ID loaded successfully")
 botver = str("1.06")
 subsver = str("1.02")
-root = tk.Tk()
+root = tk.Tk() #Creates the root window
 root.title("Discord RPC bot v" + str(botver))
 root.minsize(512, 512)
 tk.Label(root, text="Discord RPC bot").pack()
