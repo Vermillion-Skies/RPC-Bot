@@ -65,8 +65,8 @@ def statcode(x, y):
 def selection_changed(event):
     global statusfile
     statusfile = event.widget.get()
-    print(statusfile + str(" loaded into bot"))
-    fslabel.config(text=f"{event.widget.get()} selected!")
+    consout(statusfile + str(" loaded into bot"))
+    fslabel.config(text=f"{event.widget.get()} selected")
     fs1label.config(text=statcode(statusfile, "d"))
     fs2label.config(text=statcode(statusfile, "s"))
     fs3label.config(text=statcode(statusfile, "li"))
@@ -75,8 +75,17 @@ def selection_changed(event):
 def broadcaststart():
     global broadstat
     global new_window
-    RPC.connect()
+    consout("Starting RPC connection")
+    consout("Attempting to open endpoint...")
+    try:
+        RPC.connect()
+        consout("Endpoint connected")
+        pass
+    except Exception as e:
+        errorwindow(e)
+        pass
     starttime = time.time()
+    consout("Activity start time set to " + str(starttime))
     broadstat = str("1")
     winmade = str("n")
     new_window = tk.Toplevel(root)
@@ -101,6 +110,7 @@ def broadcaststart():
                 {"label": "RPC-Bot by Vermillion-Skies", "url": "https://github.com/Vermillion-Skies/RPC-Bot"}
             ],
         )
+        consout("RPC activity set")
     except Exception as e:
         errorwindow(e)
         pass
