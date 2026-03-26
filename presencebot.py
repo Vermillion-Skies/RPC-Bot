@@ -69,6 +69,7 @@ def selection_changed(event):
     fs1label.config(text=statcode(statusfile, "d"))
     fs2label.config(text=statcode(statusfile, "s"))
     fs3label.config(text=statcode(statusfile, "li"))
+    button.config(state=tk.NORMAL)
     pass
 def broadcaststart():
     global broadstat
@@ -192,6 +193,7 @@ button = tk.Button(
     root,
     text="Start status broadcast",
     command=buttonclick,
+    state=tk.DISABLED,
 )
 button.pack(padx=5, pady=5)
 button2 = tk.Button(
