@@ -28,8 +28,8 @@ def getappid(): #Gets the application ID defined in pbcred.txt
         errorwindow(e) #Calls the error handler
         pass
     pass
-def statcode(x, y):
-    if y == str("d"):
+def statcode(x, y): #Fetches an indicated line (y) from an indicated file (x)
+    if y == str("d"): #Changes the line variable based on the inserted variable y
         line = int(0)
         pass
     elif y == str("s"):
@@ -48,16 +48,16 @@ def statcode(x, y):
         line = int(5)
         pass
     try:
-        with open("./statuses/" + str(x), "r") as file:
-            filelist = file.read().splitlines()
-            if filelist[line] == str("null"):
+        with open("./statuses/" + str(x), "r") as file: #Opens the selected file in read-only mode
+            filelist = file.read().splitlines() #Sets the list filelist to every line within the file, with the lines split
+            if filelist[line] == str("null"): #If the line has the value "null" it doesn't return anything
                 pass
-            else:
+            else: #If the line has any content, it returns it
                 return(filelist[line])
             pass
         pass
     except Exception as e:
-        if str(e) == "list index out of range":
+        if str(e) == "list index out of range": #If the exception is that the line requested doesn't exist, don't crash
             pass
         else:
             errorwindow(e)
