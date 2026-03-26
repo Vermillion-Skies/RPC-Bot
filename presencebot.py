@@ -184,7 +184,7 @@ def killprogram(): #Kills the program
 def startconsoleout(): #Prints in the console for troubleshooting
     print("Vermillion RPC bot")
     pass
-def consout(x):
+def consout(x): #Outputs time and a string to the console
     print("[" + str(fetchtime("h")) + ":" + str(fetchtime("m")) + ":" + str(fetchtime("s")) + "] - " + str(x))
     pass
 def fetchtime(x):
