@@ -17,14 +17,15 @@ import time
 import os
 import sys
 import subprocess
-def getappid():
+def getappid(): #Gets the application ID defined in pbcred.txt
+    consout("Getting app ID...")
     try:
-        with open("pbcred.txt", "r") as file:
+        with open("pbcred.txt", "r") as file: #Opens pbcred.txt in read-only mode
             return(file.read().splitlines())
             pass
         pass
     except Exception as e:
-        errorwindow(e)
+        errorwindow(e) #Calls the error handler
         pass
     pass
 def statcode(x, y):
@@ -64,7 +65,7 @@ def statcode(x, y):
 def selection_changed(event):
     global statusfile
     statusfile = event.widget.get()
-    print(statusfile)
+    print(statusfile + str(" loaded into bot"))
     fslabel.config(text=f"{event.widget.get()} selected!")
     fs1label.config(text=statcode(statusfile, "d"))
     fs2label.config(text=statcode(statusfile, "s"))
@@ -162,7 +163,27 @@ def errorwindow(x):
 def killprogram():
     root.destroy()
     pass
+def startconsoleout():
+    print("Vermillion RPC bot")
+    pass
+def consout(x):
+    print("[" + str(fetchtime("h")) + ":" + str(fetchtime("m")) + ":" + str(fetchtime("s")) + "] - " + str(x))
+    pass
+def fetchtime(x):
+    currenttime = time.time()
+    localtime = time.localtime(currenttime)
+    if x == "h":
+        return(localtime.tm_hour)
+        pass
+    elif x == "m":
+        return(localtime.tm_min)
+        pass
+    elif x == "s":
+        return(localtime.tm_sec)
+    pass
+startconsoleout()
 filelist = os.listdir("./statuses")
+consout("Files in status directory: " + str(filelist))
 statusfile = str("")
 appidl = getappid()
 appid = appidl[0]
@@ -170,6 +191,7 @@ if appid == str("fail"):
     quit()
 else:
     RPC = Presence(appid)
+    consout("Application ID loaded successfully")
 botver = str("1.06")
 subsver = str("1.02")
 root = tk.Tk()
