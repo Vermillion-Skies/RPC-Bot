@@ -131,10 +131,10 @@ def subscriptbutton(): #Launches subscript loader when button clicked
     consout("Opening subscript launcher...")
     subprocess.run(["python", "subscripts/subscriptloader.py"], check=True) #Loads subscriptloader.py
     pass
-def settings():
+def settings(): #Loads settings menu
     global setwin
     consout("Loading settings menu...")
-    setwin = tk.Toplevel(root)
+    setwin = tk.Toplevel(root) #Creates the settings window
     setwin.title("RPC Bot settings")
     setwin.geometry("300x200")
     setlab = tk.Label(setwin, text="Settings coming soon!")
