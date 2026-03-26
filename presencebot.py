@@ -146,10 +146,10 @@ def settings(): #Loads settings menu
     )
     setbut.pack(padx=5, pady=5)
     pass
-def abtbutt():
+def abtbutt(): #Opens about window
     global setwin
     consout("Opening about window...")
-    abtwin = tk.Toplevel(setwin)
+    abtwin = tk.Toplevel(setwin) #Creates the window
     abtwin.title("About")
     abtwin.geometry("300x200")
     abtlab1 = tk.Label(abtwin, text="RPC Bot script (GUI)")
