@@ -62,15 +62,15 @@ def statcode(x, y): #Fetches an indicated line (y) from an indicated file (x)
         else:
             errorwindow(e)
     pass
-def selection_changed(event):
+def selection_changed(event): #Changes labels and enables button when dropdown box is changed
     global statusfile
-    statusfile = event.widget.get()
+    statusfile = event.widget.get() #Sets this variable to the file selected from the dropdown
     consout(statusfile + str(" loaded into bot"))
-    fslabel.config(text=f"{event.widget.get()} selected")
-    fs1label.config(text=statcode(statusfile, "d"))
+    fslabel.config(text=f"{event.widget.get()} selected") #Displays what file was selected
+    fs1label.config(text=statcode(statusfile, "d")) #Changes labels to file contents
     fs2label.config(text=statcode(statusfile, "s"))
     fs3label.config(text=statcode(statusfile, "li"))
-    button.config(state=tk.NORMAL)
+    button.config(state=tk.NORMAL) #Enables the broadcast button
     pass
 def broadcaststart():
     global broadstat
