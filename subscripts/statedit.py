@@ -44,6 +44,7 @@ def inputrefresh():
         entryd.insert(0, entrylist[0])
     except Exception as e:
         if str(e) == str("list index out of range"):
+            entrylist.append("null")
             pass
         else:
             quit()
@@ -52,6 +53,7 @@ def inputrefresh():
         entrys.insert(0, entrylist[1])
     except Exception as e:
         if str(e) == str("list index out of range"):
+            entrylist.append("null")
             pass
         else:
             quit()
@@ -60,6 +62,7 @@ def inputrefresh():
         entryli.insert(0, entrylist[2])
     except Exception as e:
         if str(e) == str("list index out of range"):
+            entrylist.append("null")
             pass
         else:
             quit()
@@ -68,6 +71,7 @@ def inputrefresh():
         entrylt.insert(0, entrylist[3])
     except Exception as e:
         if str(e) == str("list index out of range"):
+            entrylist.append("null")
             pass
         else:
             quit()
@@ -76,6 +80,7 @@ def inputrefresh():
         entrysi.insert(0, entrylist[4])
     except Exception as e:
         if str(e) == str("list index out of range"):
+            entrylist.append("null")
             pass
         else:
             quit()
@@ -84,6 +89,7 @@ def inputrefresh():
         entryst.insert(0, entrylist[5])
     except Exception as e:
         if str(e) == str("list index out of range"):
+            entrylist.append("null")
             pass
         else:
             quit()
