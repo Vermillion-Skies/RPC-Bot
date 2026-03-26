@@ -128,10 +128,12 @@ def buttonclick():
     broadcaststart()
     pass
 def subscriptbutton():
+    consout("Opening subscript launcher...")
     subprocess.run(["python", "subscripts/subscriptloader.py"], check=True)
     pass
 def settings():
     global setwin
+    consout("Loading settings menu...")
     setwin = tk.Toplevel(root)
     setwin.title("RPC Bot settings")
     setwin.geometry("300x200")
@@ -146,6 +148,7 @@ def settings():
     pass
 def abtbutt():
     global setwin
+    consout("Opening about window...")
     abtwin = tk.Toplevel(setwin)
     abtwin.title("About")
     abtwin.geometry("300x200")
@@ -160,6 +163,7 @@ def abtbutt():
     pass
 def errorwindow(x):
     errwin = tk.Toplevel(root)
+    consout("Opening exception handler...")
     errwin.title("An error has occurred")
     errwin.geometry("512x512")
     errlab1 = tk.Label(errwin, text="An error has occurred and the program needs to close.")
@@ -174,6 +178,7 @@ def errorwindow(x):
     )
     pass
 def killprogram():
+    consout("Killing program...")
     root.destroy()
     pass
 def startconsoleout():
