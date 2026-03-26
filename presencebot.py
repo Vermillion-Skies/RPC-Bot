@@ -124,7 +124,7 @@ def broadcastend(): #Ends the RPC broadcast
     consout("Endpoint closed")
     new_window.destroy() #Destroys the broadcast window
     pass
-def buttonclick():
+def buttonclick(): #Starts the broadcast when button clicked
     broadcaststart()
     pass
 def subscriptbutton():
