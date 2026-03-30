@@ -79,6 +79,10 @@ def themeset(x):
     else:
         exit()
         pass
+    root.config(bg=winbg)
+    statmakebutton.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+    stateditbutton.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+    exitbutton.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
 conf = []
 winbg = "0"
 textcolor = "0"
