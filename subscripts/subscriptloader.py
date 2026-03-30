@@ -62,6 +62,10 @@ def confmake():
 def themeset(x):
     pass
 conf = []
+winbg = "0"
+textcolor = "0"
+buttonbgc = "0"
+buttonbgca = "0"
 root = tk.Tk()
 root.title("Subscript loader")
 root.minsize(512, 512)
