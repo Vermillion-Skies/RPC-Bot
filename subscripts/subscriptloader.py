@@ -49,6 +49,15 @@ def loadconfig():
     pass
     pass
 def confmake():
+    global conf
+    try:
+        with open("config.txt", "w") as file:
+            file.write("\n".join(conf))
+            pass
+        pass
+    except Exception as e:
+        exit()
+        pass
     pass
 def themeset(x):
     pass
