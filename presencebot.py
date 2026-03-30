@@ -249,7 +249,7 @@ def confmake(): #Function to both create and update config file
         errorwindow(e)
         pass
     pass
-def themeset(x):
+def themeset(x): #Changes all of the root ui elements to a theme determined in the config file, and sets placeholder variables for future elements
     pass
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
