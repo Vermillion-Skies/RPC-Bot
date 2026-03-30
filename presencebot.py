@@ -209,7 +209,7 @@ def loadconfig(): #Loads the config file
     global conf
     consout("Loading configuration files...")
     try:
-        with open("subscripts/config.txt", "r") as file: #opens the config file
+        with open("config.txt", "r") as file: #opens the config file
             conf = file.read().splitlines()
             pass
         if conf[0] == "0":
@@ -225,7 +225,7 @@ def loadconfig(): #Loads the config file
             pass
         pass
     except Exception as e:
-        if str(e) == "[Errno 2] No such file or directory: 'subscripts/config.txt'":
+        if str(e) == "[Errno 2] No such file or directory: 'config.txt'":
             consout("No config file, creating one...")
             confmake("c")
             pass
@@ -233,6 +233,8 @@ def loadconfig(): #Loads the config file
             errorwindow(e)
             pass
         pass
+    pass
+def confmake(x): #Function to both create and update config file
     pass
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
