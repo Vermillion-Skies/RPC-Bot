@@ -133,12 +133,13 @@ def subscriptbutton(): #Launches subscript loader when button clicked
     pass
 def settings(): #Loads settings menu
     global setwin
+    global conf
     consout("Loading settings menu...")
     setwin = tk.Toplevel(root) #Creates the settings window
     setwin.title("RPC Bot settings")
     setwin.geometry("300x200")
     setwin.config(bg=winbg)
-    setlab = tk.Label(setwin, text="Theme", bg=winbg, fg=textcolor)
+    setlab = tk.Label(setwin, text="Theme (requires restart)", bg=winbg, fg=textcolor)
     setlab.pack(padx=5, pady=5)
     themecombox = ttk.Combobox(setwin, values=["Light", "Dark"])
     themecombox.set("Change theme to...")
@@ -155,7 +156,14 @@ def settings(): #Loads settings menu
     setbut.pack(padx=5, pady=5)
     pass
 def themesetchange(event):
-    pass
+    if event.widget.get() == "Light":
+        conf[0] = "0"
+        confmake()
+        pass
+    elif event.widget.get() == "Dark":
+        conf[0] = "1"
+        confmake()
+        pass
 def abtbutt(): #Opens about window
     global setwin
     consout("Opening about window...")
@@ -251,7 +259,6 @@ def loadconfig(): #Loads the config file
     pass
 def confmake(): #Function to both create and update config file
     global conf
-    conf = ["0"]
     try:
         with open("config.txt", "w") as file:
             file.write("\n".join(conf))
