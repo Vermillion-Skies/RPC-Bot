@@ -240,6 +240,7 @@ def loadconfig(): #Loads the config file
     pass
 def confmake(): #Function to both create and update config file
     global conf
+    conf = ["0"]
     try:
         with open("config.txt", "w") as file:
             file.write("\n".join(conf))
@@ -251,6 +252,10 @@ def confmake(): #Function to both create and update config file
     pass
 def themeset(x): #Changes all of the root ui elements to a theme determined in the config file, and sets placeholder variables for future elements
     if x == str("0"):
+        winbg = "#FFFFFF"
+        textcolor = "#000000"
+        buttonbgc = "#FFFFFF"
+        buttonbgca = "#808080"
         pass
     elif x == str("1"):
         winbg = "#A9A9A9"
