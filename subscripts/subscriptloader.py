@@ -20,6 +20,39 @@ def smbuttonclick():
 def exit():
     root.destroy()
     pass
+def loadconfig():
+    global conf
+    try:
+        with open("config.txt", "r") as file: #opens the config file
+            conf = file.read().splitlines()
+            pass
+        if conf[0] == "0":
+            themeset("0")
+            pass
+        elif conf[0] == "1":
+            themeset("1")
+            pass
+        else:
+            exit()
+            pass
+        pass
+    except Exception as e:
+        if str(e) == "[Errno 2] No such file or directory: 'config.txt'":
+            confmake()
+            pass
+        elif str(e) == "list index out of range":
+            pass
+        else:
+            exit()
+            pass
+        pass
+    pass
+    pass
+def confmake():
+    pass
+def themeset(x):
+    pass
+conf = []
 root = tk.Tk()
 root.title("Subscript loader")
 root.minsize(512, 512)
