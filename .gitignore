@@ -1,2 +1,5 @@
 #File with personal bot credentials
 pbcred.txt
+#Doesn't upload config files with pushes
+config.txt
+subscripts/config.txt
