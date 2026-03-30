@@ -185,4 +185,5 @@ filesave = tk.Button(
     command=savefile
 )
 filesave.pack()
+root.after(1, loadconfig)
 root.mainloop()
