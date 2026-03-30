@@ -250,7 +250,18 @@ def confmake(): #Function to both create and update config file
         pass
     pass
 def themeset(x): #Changes all of the root ui elements to a theme determined in the config file, and sets placeholder variables for future elements
-    pass
+    if x == str("0"):
+        pass
+    elif x == str("1"):
+        winbg = "#A9A9A9"
+        textcolor = "#000000"
+        buttonbgc = "#A9A9A9"
+        buttonbgca = "#808080"
+        pass
+    else:
+        errorwindow("Failed to load themes: bad call")
+        quit
+        pass
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
@@ -265,6 +276,10 @@ else:
 botver = str("1.06")
 subsver = str("1.02")
 conf = []
+winbg = "0"
+textcolor = "0"
+buttonbgc = "0"
+buttonbgca = "0"
 root = tk.Tk() #Creates the root window
 root.title("Discord RPC bot v" + str(botver))
 root.minsize(512, 512)
