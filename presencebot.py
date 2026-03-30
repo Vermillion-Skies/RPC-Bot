@@ -137,12 +137,16 @@ def settings(): #Loads settings menu
     setwin = tk.Toplevel(root) #Creates the settings window
     setwin.title("RPC Bot settings")
     setwin.geometry("300x200")
-    setlab = tk.Label(setwin, text="Settings coming soon!")
+    setwin.config(bg=winbg)
+    setlab = tk.Label(setwin, text="Theme", bg=winbg, fg=textcolor)
     setlab.pack(padx=5, pady=5)
     setbut = tk.Button(
         setwin,
         text="About Script",
         command=abtbutt,
+        activebackground=buttonbgca, 
+        bg=buttonbgc, 
+        fg=textcolor,
     )
     setbut.pack(padx=5, pady=5)
     pass
@@ -251,6 +255,10 @@ def confmake(): #Function to both create and update config file
         pass
     pass
 def themeset(x): #Changes all of the root ui elements to a theme determined in the config file, and sets placeholder variables for future elements
+    global winbg
+    global textcolor
+    global buttonbgc
+    global buttonbgca
     if x == str("0"):
         winbg = "#FFFFFF"
         textcolor = "#000000"
@@ -278,6 +286,7 @@ def themeset(x): #Changes all of the root ui elements to a theme determined in t
     button.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     button2.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     button3.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+    consout("Theme successfully loaded")
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
