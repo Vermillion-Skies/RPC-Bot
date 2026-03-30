@@ -162,6 +162,7 @@ def abtbutt(): #Opens about window
     abtlab4.pack()
     pass
 def errorwindow(x): #Error catcher
+    consout(x)
     errwin = tk.Toplevel(root)
     consout("Opening exception handler...")
     errwin.title("An error has occurred") #Creates error window
@@ -227,14 +228,26 @@ def loadconfig(): #Loads the config file
     except Exception as e:
         if str(e) == "[Errno 2] No such file or directory: 'config.txt'":
             consout("No config file, creating one...")
-            confmake("c")
+            confmake()
+            pass
+        elif str(e) == "list index out of range":
+            consout("Config file empty, skipping...")
             pass
         else:
             errorwindow(e)
             pass
         pass
     pass
-def confmake(x): #Function to both create and update config file
+def confmake(): #Function to both create and update config file
+    global conf
+    try:
+        with open("config.txt", "w") as file:
+            file.write("\n".join(conf))
+            pass
+        pass
+    except Exception as e:
+        errorwindow(e)
+        pass
     pass
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
