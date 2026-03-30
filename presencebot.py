@@ -263,6 +263,9 @@ def confmake(): #Function to both create and update config file
         with open("config.txt", "w") as file:
             file.write("\n".join(conf))
             pass
+        with open("subscripts/config.txt", "w") as file:
+            file.write("\n".join(conf))
+            pass
         pass
     except Exception as e:
         errorwindow(e)
