@@ -167,15 +167,21 @@ def errorwindow(x): #Error catcher
     errwin.title("An error has occurred") #Creates error window
     errwin.geometry("512x512")
     errlab1 = tk.Label(errwin, text="An error has occurred and the program needs to close.")
+    errlab1.pack()
     errlab2 = tk.Label(errwin, text="Error is as follows: ")
+    errlab2.pack()
     errlab3 = tk.Label(errwin, text=str(x)) #Prints exception
+    errlab3.pack()
     errlab4 = tk.Label(errwin, text="Please report this error to the Github issues page")
+    errlab4.pack()
     errlab5 = tk.Label(errwin, text="Press the button below to close the program.")
+    errlab5.pack()
     errbutt = tk.Button(
         errwin,
         text="Close",
         command=killprogram
     )
+    errbutt.pack()
     pass
 def killprogram(): #Kills the program
     consout("Killing program...")
