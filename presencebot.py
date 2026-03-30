@@ -200,19 +200,34 @@ def fetchtime(x): #Fetches the time in a readable format
         return(localtime.tm_sec) #Returns the second
     pass
 def loadconfig(): #Loads the config file
-    global conftheme
+    global conf
     consout("Loading configuration files...")
     try:
         with open("subscripts/config.txt", "r") as file: #opens the config file
-            conftheme = file.read().splitlines()
+            conf = file.read().splitlines()
             pass
-        if conftheme[0] == "0":
+        if conf[0] == "0":
             consout("Light theme loading...")
+            themeset("0")
+            pass
+        elif conf[0] == "1":
+            consout("Dark theme loading...")
+            themeset("1")
+            pass
+        else:
+            errorwindow("Config file has bad parameters")
             pass
         pass
     except Exception as e:
         if str(e) == "[Errno 2] No such file or directory: 'subscripts/config.txt'":
-            consout("No config file, skipping...")
+            consout("No config file, creating one...")
+            confmake("c")
+            pass
+        else:
+            errorwindow(e)
+            pass
+        pass
+    pass
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
@@ -226,7 +241,7 @@ else:
     consout("Application ID loaded successfully")
 botver = str("1.06")
 subsver = str("1.02")
-conftheme = []
+conf = []
 root = tk.Tk() #Creates the root window
 root.title("Discord RPC bot v" + str(botver))
 root.minsize(512, 512)
