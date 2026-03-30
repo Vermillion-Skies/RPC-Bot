@@ -140,6 +140,10 @@ def settings(): #Loads settings menu
     setwin.config(bg=winbg)
     setlab = tk.Label(setwin, text="Theme", bg=winbg, fg=textcolor)
     setlab.pack(padx=5, pady=5)
+    themecombox = ttk.Combobox(setwin, values=["Light", "Dark"])
+    themecombox.set("Change theme to...")
+    themecombox.bind("<<ComboboxSelected>>", themesetchange)
+    themecombox.pack()
     setbut = tk.Button(
         setwin,
         text="About Script",
@@ -149,6 +153,8 @@ def settings(): #Loads settings menu
         fg=textcolor,
     )
     setbut.pack(padx=5, pady=5)
+    pass
+def themesetchange(event):
     pass
 def abtbutt(): #Opens about window
     global setwin
