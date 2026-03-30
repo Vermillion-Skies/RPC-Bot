@@ -105,4 +105,5 @@ exitbutton = tk.Button(
     command=exit,
 )
 exitbutton.pack()
+root.after(1, loadconfig)
 root.mainloop()
