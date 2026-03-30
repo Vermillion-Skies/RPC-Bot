@@ -262,6 +262,17 @@ def themeset(x): #Changes all of the root ui elements to a theme determined in t
         errorwindow("Failed to load themes: bad call")
         quit
         pass
+    root.config(bg=winbg)
+    mainlab1.config(bg=winbg, fg=textcolor)
+    mainlab2.config(bg=winbg, fg=textcolor)
+    combobox.config(foreground=textcolor)
+    fslabel.config(bg=winbg, fg=textcolor)
+    fs1label.config(bg=winbg, fg=textcolor)
+    fs2label.config(bg=winbg, fg=textcolor)
+    fs3label.config(bg=winbg, fg=textcolor)
+    button.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+    button2.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+    button3.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
