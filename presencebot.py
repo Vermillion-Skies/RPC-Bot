@@ -249,6 +249,8 @@ def confmake(): #Function to both create and update config file
         errorwindow(e)
         pass
     pass
+def themeset(x):
+    pass
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
