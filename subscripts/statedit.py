@@ -136,7 +136,12 @@ def openfile():
     inputrefresh()
     pass #Function to open file dialog and ask for a file path
 entrylist = ["null", "null", "null", "null", "null", "null"]
-ver = str("1.01")
+conf = []
+winbg = "0"
+textcolor = "0"
+buttonbgc = "0"
+buttonbgca = "0"
+ver = str("1.02")
 statfile = str("null")
 root = tk.Tk()
 root.title("Status edit tool v" + str(ver))
