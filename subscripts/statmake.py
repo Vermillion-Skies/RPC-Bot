@@ -85,8 +85,13 @@ def entrystdone(event):
     global entrylist
     entrylist[5] = event.widget.get()
     pass
+conf = []
+winbg = "0"
+textcolor = "0"
+buttonbgc = "0"
+buttonbgca = "0"
 entrylist = ["null", "null", "null", "null", "null", "null"]
-ver = str("1.01")
+ver = str("1.02")
 root = tk.Tk()
 root.title("Status creation tool v" + str(ver))
 root.minsize(720, 720)
