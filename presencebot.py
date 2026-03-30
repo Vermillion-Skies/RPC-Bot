@@ -199,6 +199,8 @@ def fetchtime(x): #Fetches the time in a readable format
     elif x == "s":
         return(localtime.tm_sec) #Returns the second
     pass
+def loadconfig():
+    consout("Loading configuration files...")
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
@@ -248,4 +250,5 @@ button3 = tk.Button(
     command=settings,
 )
 button3.pack(padx=5, pady=5)
+root.after(1, loadconfig)
 root.mainloop()
