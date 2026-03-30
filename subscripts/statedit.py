@@ -123,7 +123,7 @@ def closefdw():
     global fdwindow
     fdwindow.destroy()
     pass
-def openfile():
+def openfile():  #Function to open file dialog and ask for a file path
     global statfile
     global entrylist
     statfile = filedialog.askopenfilename()
@@ -134,7 +134,71 @@ def openfile():
     except Exception as e:
         quit()
     inputrefresh()
-    pass #Function to open file dialog and ask for a file path
+    pass
+def loadconfig():
+    global conf
+    try:
+        with open("config.txt", "r") as file: #opens the config file
+            conf = file.read().splitlines()
+            pass
+        if conf[0] == "0":
+            themeset("0")
+            pass
+        elif conf[0] == "1":
+            themeset("1")
+            pass
+        else:
+            exit()
+            pass
+        pass
+    except Exception as e:
+        if str(e) == "[Errno 2] No such file or directory: 'config.txt'":
+            confmake()
+            pass
+        elif str(e) == "list index out of range":
+            pass
+        else:
+            exit()
+            pass
+        pass
+    pass
+    pass
+def confmake():
+    global conf
+    try:
+        with open("config.txt", "w") as file:
+            file.write("\n".join(conf))
+            pass
+        pass
+    except Exception as e:
+        exit()
+        pass
+    pass
+def themeset(x):
+    global winbg
+    global textcolor
+    global buttonbgc
+    global buttonbgca
+    if x == str("0"):
+        winbg = "#FFFFFF"
+        textcolor = "#000000"
+        buttonbgc = "#FFFFFF"
+        buttonbgca = "#808080"
+        pass
+    elif x == str("1"):
+        winbg = "#A9A9A9"
+        textcolor = "#000000"
+        buttonbgc = "#A9A9A9"
+        buttonbgca = "#808080"
+        pass
+    else:
+        exit()
+        pass
+    root.config(bg=winbg)
+    titlelabel.config(bg=winbg, fg=textcolor)
+    fileopenbutt.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+    filelabel.config(bg=winbg, fg=textcolor)
+    filesave.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
 entrylist = ["null", "null", "null", "null", "null", "null"]
 conf = []
 winbg = "0"
@@ -146,7 +210,8 @@ statfile = str("null")
 root = tk.Tk()
 root.title("Status edit tool v" + str(ver))
 root.minsize(720, 720)
-tk.Label(root, text="Status edit tool").pack()
+titlelabel = tk.Label(root, text="Status edit tool")
+titlelabel.pack()
 fileopenbutt = tk.Button(
     root,
     text="Open file",
