@@ -60,7 +60,25 @@ def confmake():
         pass
     pass
 def themeset(x):
-    pass
+    global winbg
+    global textcolor
+    global buttonbgc
+    global buttonbgca
+    if x == str("0"):
+        winbg = "#FFFFFF"
+        textcolor = "#000000"
+        buttonbgc = "#FFFFFF"
+        buttonbgca = "#808080"
+        pass
+    elif x == str("1"):
+        winbg = "#A9A9A9"
+        textcolor = "#000000"
+        buttonbgc = "#A9A9A9"
+        buttonbgca = "#808080"
+        pass
+    else:
+        exit()
+        pass
 conf = []
 winbg = "0"
 textcolor = "0"
