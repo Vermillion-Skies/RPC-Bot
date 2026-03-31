@@ -369,6 +369,7 @@ def makemain():
         command=settings,
     )
     button3.pack(padx=5, pady=5)
+    root.protocol("WM_DELETE_WINDOW", onclose)
     root.after(1, loadconfig)
 def startup():
     consout("Running startup checks...")
