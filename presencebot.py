@@ -100,6 +100,7 @@ def broadcaststart(): #Begins broadcasting to Discord
     nwlabel2.pack(padx=5, pady=5)
     nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend, activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     nwbutton.pack(padx=5, pady=5)
+    new_window.protocol("WM_DELETE_WINDOW", onclose)
     try: #Updates activity in Discord with file contents
         RPC.update(
             details=statcode(statusfile, "d"),
@@ -264,6 +265,7 @@ def loadconfig(): #Loads the config file
     pass
 def confmake(): #Function to both create and update config file
     global conf
+    conf = [1]
     try:
         with open("config.txt", "w") as file:
             file.write("\n".join(conf))
