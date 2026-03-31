@@ -89,13 +89,14 @@ def broadcaststart(): #Begins broadcasting to Discord
     broadstat = str("1")
     winmade = str("n")
     new_window = tk.Toplevel(root)
+    new_window.config(bg=winbg)
     new_window.title("RPC running!")
     new_window.geometry("300x200")
-    nwlabel1 = tk.Label(new_window, text="RPC now running!")
-    nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting")
+    nwlabel1 = tk.Label(new_window, text="RPC now running!", bg=winbg, fg=textcolor)
+    nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting", bg=winbg, fg=textcolor)
     nwlabel1.pack(padx=5, pady=5)
     nwlabel2.pack(padx=5, pady=5)
-    nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend)
+    nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend, activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     nwbutton.pack(padx=5, pady=5)
     try: #Updates activity in Discord with file contents
         RPC.update(
