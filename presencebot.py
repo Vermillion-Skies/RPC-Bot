@@ -375,11 +375,35 @@ def makemain():
     button3.pack(padx=5, pady=5)
     root.protocol("WM_DELETE_WINDOW", onclose)
     root.after(1, loadconfig)
-def startup():
+def startlogic():
+    global startupwin
     consout("Running startup checks...")
     consout("Checking for presence of config file...")
+    activeinput = 1
+    while activeinput == 1:
+        try:
+            with open("config.txt", "r") as file:
+                consout("Config file exists")
+                activeinput = 0
+                pass
+            pass
+        except:
+            consout("File doesn't exist, generating...")
+            confmake()
+            consout("confmake passed, checking again...")
+            pass
+        pass
+    consout("Config check passed")
+    consout("Starting main program...")
     startwin.withdraw()
+    startupwin.destroy()
     makemain()
+def startup():
+    global startupwin
+    startupwin = tk.Toplevel(startwin)
+    startupwin.title("Starting...")
+    tk.Label(startupwin, text="Loading RPC bot, please wait...").pack()
+    startupwin.after(1, startlogic)
 def onclose():
     startwin.destroy()
 startconsoleout()
