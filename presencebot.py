@@ -256,7 +256,8 @@ def loadconfig(): #Loads the config file
             confmake()
             pass
         elif str(e) == "list index out of range":
-            consout("Config file empty, skipping...")
+            consout("Config file empty, remaking...")
+            confmake()
             pass
         else:
             errorwindow(e)
@@ -376,6 +377,7 @@ def makemain():
     root.after(1, loadconfig)
 def startup():
     consout("Running startup checks...")
+    consout("Checking for presence of config file...")
     startwin.withdraw()
     makemain()
 def onclose():
