@@ -8,6 +8,7 @@ except Exception as e:
 try:
     import tkinter as tk
     from tkinter import ttk
+    from tkinter import messagebox
 except Exception as e:
     print("AN EXCEPTION HAS OCCURRED: " + str(e))
     print("Hint: You might not have the tkinter library installed!")
@@ -373,6 +374,9 @@ def startup():
     consout("Running startup checks...")
     startwin.withdraw()
     makemain()
+def onclose():
+    if messagebox.askokcancel("Quit", "Are you sure you want to quit?"):
+        startwin.destroy()
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
@@ -394,4 +398,3 @@ buttonbgca = "0"
 startwin = tk.Tk()
 startwin.after(1, startup)
 startwin.mainloop()
-startwin.destroy()
