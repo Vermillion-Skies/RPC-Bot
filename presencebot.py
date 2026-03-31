@@ -206,6 +206,7 @@ def errorwindow(x): #Error catcher
         command=killprogram
     )
     errbutt.pack()
+    errwin.protocol("WM_DELETE_WINDOW", onclose)
     pass
 def killprogram(): #Kills the program
     consout("Killing program...")
@@ -376,8 +377,7 @@ def startup():
     startwin.withdraw()
     makemain()
 def onclose():
-    if messagebox.askokcancel("Quit", "Are you sure you want to quit?"):
-        startwin.destroy()
+    startwin.destroy()
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
