@@ -75,6 +75,7 @@ def selection_changed(event): #Changes labels and enables button when dropdown b
 def broadcaststart(): #Begins broadcasting to Discord
     global broadstat
     global new_window
+    root.destroy()
     consout("Starting RPC connection")
     consout("Attempting to open endpoint...")
     try:
@@ -124,6 +125,7 @@ def broadcastend(): #Ends the RPC broadcast
     RPC.close() #Closes endpoint
     consout("Endpoint closed")
     new_window.destroy() #Destroys the broadcast window
+    makemain()
     pass
 def buttonclick(): #Starts the broadcast when button clicked
     broadcaststart()
@@ -277,6 +279,17 @@ def themeset(x): #Changes all of the root ui elements to a theme determined in t
     global textcolor
     global buttonbgc
     global buttonbgca
+    global root
+    global mainlab1
+    global mainlab2
+    global combobox
+    global fslabel
+    global fs1label
+    global fs2label
+    global fs3label
+    global button
+    global button2
+    global button3
     if x == str("0"):
         winbg = "#FFFFFF"
         textcolor = "#000000"
@@ -305,6 +318,61 @@ def themeset(x): #Changes all of the root ui elements to a theme determined in t
     button2.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     button3.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     consout("Theme successfully loaded")
+def makemain():
+    global root
+    global mainlab1
+    global mainlab2
+    global combobox
+    global fslabel
+    global fs1label
+    global fs2label
+    global fs3label
+    global button
+    global button2
+    global button3
+    root = tk.Toplevel(startwin) #Creates the root window
+    root.title("Discord RPC bot v" + str(botver))
+    root.minsize(512, 512)
+    mainlab1 = tk.Label(root, text="Discord RPC bot")
+    mainlab1.pack()
+    mainlab2 = tk.Label(root, text="Version " + str(botver))
+    mainlab2.pack()
+    combobox = ttk.Combobox(root, values=filelist)
+    combobox.set("Please select a status file")
+    combobox.bind("<<ComboboxSelected>>", selection_changed)
+    combobox.pack(padx=5, pady=5, fill="x")
+    fslabel = tk.Label(root, text="Please select a status")
+    fslabel.pack(padx=5, pady=5, fill="x")
+    fs1label = tk.Label(root, text="")
+    fs1label.pack(padx=5, pady=5, fill="x")
+    fs2label = tk.Label(root, text="")
+    fs2label.pack(padx=5, pady=5, fill="x")
+    fs3label = tk.Label(root, text="")
+    fs3label.pack(padx=5, pady=5, fill="x")
+    button = tk.Button(
+        root,
+        text="Start status broadcast",
+        command=buttonclick,
+        state=tk.DISABLED,
+    )
+    button.pack(padx=5, pady=5)
+    button2 = tk.Button(
+        root,
+        text="Subscripts...",
+        command=subscriptbutton,
+    )
+    button2.pack(padx=5, pady=5)
+    button3 = tk.Button(
+        root,
+        text="Settings",
+        command=settings,
+    )
+    button3.pack(padx=5, pady=5)
+    root.after(1, loadconfig)
+def startup():
+    consout("Running startup checks...")
+    startwin.withdraw()
+    makemain()
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
@@ -323,43 +391,7 @@ winbg = "0"
 textcolor = "0"
 buttonbgc = "0"
 buttonbgca = "0"
-root = tk.Tk() #Creates the root window
-root.title("Discord RPC bot v" + str(botver))
-root.minsize(512, 512)
-mainlab1 = tk.Label(root, text="Discord RPC bot")
-mainlab1.pack()
-mainlab2 = tk.Label(root, text="Version " + str(botver))
-mainlab2.pack()
-combobox = ttk.Combobox(root, values=filelist)
-combobox.set("Please select a status file")
-combobox.bind("<<ComboboxSelected>>", selection_changed)
-combobox.pack(padx=5, pady=5, fill="x")
-fslabel = tk.Label(root, text="Please select a status")
-fslabel.pack(padx=5, pady=5, fill="x")
-fs1label = tk.Label(root, text="")
-fs1label.pack(padx=5, pady=5, fill="x")
-fs2label = tk.Label(root, text="")
-fs2label.pack(padx=5, pady=5, fill="x")
-fs3label = tk.Label(root, text="")
-fs3label.pack(padx=5, pady=5, fill="x")
-button = tk.Button(
-    root,
-    text="Start status broadcast",
-    command=buttonclick,
-    state=tk.DISABLED,
-)
-button.pack(padx=5, pady=5)
-button2 = tk.Button(
-    root,
-    text="Subscripts...",
-    command=subscriptbutton,
-)
-button2.pack(padx=5, pady=5)
-button3 = tk.Button(
-    root,
-    text="Settings",
-    command=settings,
-)
-button3.pack(padx=5, pady=5)
-root.after(1, loadconfig)
-root.mainloop()
+startwin = tk.Tk()
+startwin.after(1, startup)
+startwin.mainloop()
+startwin.destroy()
