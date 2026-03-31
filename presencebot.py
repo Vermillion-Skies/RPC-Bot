@@ -18,6 +18,7 @@ import time
 import os
 import sys
 import subprocess
+import requests
 def getappid(): #Gets the application ID defined in pbcred.txt
     consout("Getting app ID...")
     try:
@@ -377,6 +378,7 @@ def makemain():
     root.after(1, loadconfig)
 def startlogic():
     global startupwin
+    startwin.withdraw()
     consout("Running startup checks...")
     consout("Checking for presence of config file...")
     activeinput = 1
@@ -395,7 +397,6 @@ def startlogic():
         pass
     consout("Config check passed")
     consout("Starting main program...")
-    startwin.withdraw()
     startupwin.destroy()
     makemain()
 def startup():
