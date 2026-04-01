@@ -162,13 +162,14 @@ def settings(): #Loads settings menu
     setbut.pack(padx=5, pady=5)
     pass
 def themesetchange(event):
+    global conf
     if event.widget.get() == "Light":
-        conf[0] = "0"
-        confmake()
+        conf[0] = 0
+        confmake("u", conf)
         pass
     elif event.widget.get() == "Dark":
-        conf[0] = "1"
-        confmake()
+        conf[0] = 1
+        confmake("u", conf)
         pass
 def abtbutt(): #Opens about window
     global setwin
@@ -254,20 +255,23 @@ def loadconfig(): #Loads the config file
     except Exception as e:
         if str(e) == "[Errno 2] No such file or directory: 'config.txt'":
             consout("No config file, creating one...")
-            confmake()
+            confmake("n", 0)
             pass
         elif str(e) == "list index out of range":
             consout("Config file empty, remaking...")
-            confmake()
+            confmake("n", 0)
             pass
         else:
             errorwindow(e)
             pass
         pass
     pass
-def confmake(): #Function to both create and update config file
+def confmake(x, y): #Function to both create and update config file
     global conf
-    conf = [1]
+    if x == "u":
+        pass
+    elif x == "n":
+        conf = ["1"]
     try:
         with open("config.txt", "w") as file:
             file.write("\n".join(conf))
@@ -391,7 +395,7 @@ def startlogic():
             pass
         except:
             consout("File doesn't exist, generating...")
-            confmake()
+            confmake("n", 0)
             consout("confmake passed, checking again...")
             pass
         pass
