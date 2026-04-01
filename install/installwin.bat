@@ -2,9 +2,9 @@ clear
 echo ""
 echo "Vermillion-Skies RPC-Bot installer"
 echo "Starting script..."
-md RPCBot
+md %cd%\RPCBot
 echo "Created RPCBot directory"
-cd RPCBot
+cd %cd%\RPCBot
 md assets
 echo "Created assets directory"
 cd assets
