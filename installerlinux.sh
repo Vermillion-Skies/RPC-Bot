@@ -31,7 +31,9 @@ wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RP
 cd ..
 cd ..
 wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/updater.sh
+chmod +x updater.sh
 wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/startbot.sh
+chmod +x startbot.sh
 cd assets/
 echo "Finished installing files"
 echo "Make sure to follow the instructions on GitHub to setup the app properly"
