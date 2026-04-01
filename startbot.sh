@@ -1,1 +1,2 @@
-python3 assets/presencebot.py
+cd assets/
+python3 presencebot.py
