@@ -414,7 +414,7 @@ def startup():
 def onclose():
     startwin.destroy()
 startconsoleout()
-filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
+filelist = os.listdir("statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
 statusfile = str("") #Blanks out the statusfile variable
 appidl = getappid() #Gets the appID in a list
