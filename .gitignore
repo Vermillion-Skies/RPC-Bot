@@ -3,5 +3,5 @@ pbcred.txt
 #Doesn't upload config files with pushes
 config.txt
 subscripts/config.txt
-#Doesn't upload script environment
-env/
+#Doesn't upload built files
+RPCBot/
