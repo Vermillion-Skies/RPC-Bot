@@ -30,9 +30,9 @@ cd statuses/
 wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/statuses/statustemp.txt
 cd ..
 cd ..
-wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/updater.sh
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/install/updater.sh
 chmod +x updater.sh
-wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/startbot.sh
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/install/startbot.sh
 chmod +x startbot.sh
 cd assets/
 echo "Finished installing files"
