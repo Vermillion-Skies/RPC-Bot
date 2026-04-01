@@ -5,17 +5,17 @@ mkdir assets/statuses/
 mkdir assets/subscripts/
 python3 -m venv env
 source env/bin/activate
-pip install pypresence tk
+pip install pypresence tk requests
 echo "downloading latest stable files..."
 cd assets/
-wget https://github.com/Vermillion-Skies/RPC-Bot/blob/main/presencebot.py
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/presencebot.py
 cd subscripts/
-wget https://github.com/Vermillion-Skies/RPC-Bot/blob/main/subscripts/statedit.py
-wget https://github.com/Vermillion-Skies/RPC-Bot/blob/main/subscripts/statmake.py
-wget https://github.com/Vermillion-Skies/RPC-Bot/blob/main/subscripts/subscriptloader.py
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/subscripts/statedit.py
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/subscripts/statmake.py
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/subscripts/subscriptloader.py
 cd ..
 cd statuses/
-wget https://github.com/Vermillion-Skies/RPC-Bot/blob/main/statuses/statustemp.txt
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/statuses/statustemp.txt
 cd ..
 echo "Finished installing files, loading program..."
 python3 presencebot.py
