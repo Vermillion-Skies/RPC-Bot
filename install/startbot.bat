@@ -1,2 +1,2 @@
-cd assets/
+cd %cd%\assets
 python presencebot.py
