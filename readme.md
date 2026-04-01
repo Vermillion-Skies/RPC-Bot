@@ -11,6 +11,12 @@
 - Make sure to do this in the directory you wish to install it to
 ## MacOS, Windows  
 ### Coming Soon  
+# Updating
+## Linux
+1. Enter the RPCBot folder
+2. Run updater.sh
+## MacOS, Windows
+### Coming Soon
 # Running  
 ## Linux  
 1. Enter the newly made RPCBot folder  
