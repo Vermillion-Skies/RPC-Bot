@@ -164,11 +164,11 @@ def settings(): #Loads settings menu
 def themesetchange(event):
     global conf
     if event.widget.get() == "Light":
-        conf[0] = 0
+        conf[0] = "0"
         confmake("u", conf)
         pass
     elif event.widget.get() == "Dark":
-        conf[0] = 1
+        conf[0] = "1"
         confmake("u", conf)
         pass
 def abtbutt(): #Opens about window
