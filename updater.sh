@@ -1,1 +1,1 @@
-echo "The updater doesn't work yet, dw about that too much"
+curl -fsSL https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/subscripts/updatelin.sh | bash
