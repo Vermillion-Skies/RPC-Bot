@@ -14,7 +14,8 @@ mkdir subscripts
 echo "Created subscripts directory"
 cd ..
 echo "Creating python environment..."
-python -m venv %cd%\env
+md %cd%\env
+py -m venv %cd%\env
 echo "Environment created"
 %cd%\env\bin\activate
 echo "Activated environment"
