@@ -1,11 +1,23 @@
+clear
+echo ""
+echo "Vermillion-Skies RPC-Bot installer"
+echo "Starting script..."
 mkdir RPCBot/
+echo "Created RPCBot directory"
 cd RPCBot/
 mkdir assets/
+echo "Created assets directory"
 mkdir assets/statuses/
+echo "Created statuses directory"
 mkdir assets/subscripts/
+echo "Created subscripts directory"
+echo "Creating python environment..."
 python3 -m venv env
+echo "Environment created"
 source env/bin/activate
+echo "Activated environment"
 pip install pypresence tk requests
+echo "Installed dependencies"
 echo "downloading latest stable files..."
 cd assets/
 wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/presencebot.py
@@ -19,6 +31,8 @@ wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RP
 cd ..
 cd ..
 wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/updater.sh
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/startbot.sh
 cd assets/
-echo "Finished installing files, loading program..."
-python3 presencebot.py
+echo "Finished installing files"
+echo "Make sure to follow the instructions on GitHub to setup the app properly"
+echo "Ending the installer script"
