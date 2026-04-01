@@ -283,6 +283,8 @@ def confmake(x, y): #Function to both create and update config file
     except Exception as e:
         errorwindow(e)
         pass
+    if x == "n":
+        quit()
     pass
 def themeset(x): #Changes all of the root ui elements to a theme determined in the config file, and sets placeholder variables for future elements
     global winbg
