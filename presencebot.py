@@ -27,7 +27,7 @@ def getappid(): #Gets the application ID defined in pbcred.txt
             pass
         pass
     except Exception as e:
-        errorwindow(e) #Calls the error handler
+        quit() #Calls the error handler
         pass
     pass
 def statcode(x, y): #Fetches an indicated line (y) from an indicated file (x)
