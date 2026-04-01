@@ -14,9 +14,9 @@ mkdir subscripts
 echo "Created subscripts directory"
 cd ..
 echo "Creating python environment..."
-python -m venv env
+python -m venv %cd%\env
 echo "Environment created"
-env/bin/activate
+%cd%\env\bin\activate
 echo "Activated environment"
 pip install pypresence tk requests
 echo "Installed dependencies"
