@@ -1,0 +1,1 @@
+curl -fsSL https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/subscripts/updatelin.sh | bash
