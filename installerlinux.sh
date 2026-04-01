@@ -17,5 +17,8 @@ cd ..
 cd statuses/
 wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/statuses/statustemp.txt
 cd ..
+cd ..
+wget --content-disposition https://raw.githubusercontent.com/Vermillion-Skies/RPC-Bot/main/updater.sh
+cd assets/
 echo "Finished installing files, loading program..."
 python3 presencebot.py
