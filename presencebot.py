@@ -8,6 +8,7 @@ except Exception as e:
 try:
     import tkinter as tk
     from tkinter import ttk
+    from tkinter import messagebox
 except Exception as e:
     print("AN EXCEPTION HAS OCCURRED: " + str(e))
     print("Hint: You might not have the tkinter library installed!")
@@ -17,6 +18,7 @@ import time
 import os
 import sys
 import subprocess
+import requests
 def getappid(): #Gets the application ID defined in pbcred.txt
     consout("Getting app ID...")
     try:
@@ -75,6 +77,7 @@ def selection_changed(event): #Changes labels and enables button when dropdown b
 def broadcaststart(): #Begins broadcasting to Discord
     global broadstat
     global new_window
+    root.destroy()
     consout("Starting RPC connection")
     consout("Attempting to open endpoint...")
     try:
@@ -89,14 +92,16 @@ def broadcaststart(): #Begins broadcasting to Discord
     broadstat = str("1")
     winmade = str("n")
     new_window = tk.Toplevel(root)
+    new_window.config(bg=winbg)
     new_window.title("RPC running!")
     new_window.geometry("300x200")
-    nwlabel1 = tk.Label(new_window, text="RPC now running!")
-    nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting")
+    nwlabel1 = tk.Label(new_window, text="RPC now running!", bg=winbg, fg=textcolor)
+    nwlabel2 = tk.Label(new_window, text="Press the button below to end broadcasting", bg=winbg, fg=textcolor)
     nwlabel1.pack(padx=5, pady=5)
     nwlabel2.pack(padx=5, pady=5)
-    nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend)
+    nwbutton = tk.Button(new_window, text="End broadcast", command=broadcastend, activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     nwbutton.pack(padx=5, pady=5)
+    new_window.protocol("WM_DELETE_WINDOW", onclose)
     try: #Updates activity in Discord with file contents
         RPC.update(
             details=statcode(statusfile, "d"),
@@ -123,6 +128,7 @@ def broadcastend(): #Ends the RPC broadcast
     RPC.close() #Closes endpoint
     consout("Endpoint closed")
     new_window.destroy() #Destroys the broadcast window
+    makemain()
     pass
 def buttonclick(): #Starts the broadcast when button clicked
     broadcaststart()
@@ -202,10 +208,11 @@ def errorwindow(x): #Error catcher
         command=killprogram
     )
     errbutt.pack()
+    errwin.protocol("WM_DELETE_WINDOW", onclose)
     pass
 def killprogram(): #Kills the program
     consout("Killing program...")
-    root.destroy() #Destroys root window, killing the app process
+    startwin.destroy() #Destroys root window, killing the app process
     pass
 def startconsoleout(): #Prints in the console for troubleshooting
     print("Vermillion RPC bot")
@@ -250,7 +257,8 @@ def loadconfig(): #Loads the config file
             confmake()
             pass
         elif str(e) == "list index out of range":
-            consout("Config file empty, skipping...")
+            consout("Config file empty, remaking...")
+            confmake()
             pass
         else:
             errorwindow(e)
@@ -259,6 +267,7 @@ def loadconfig(): #Loads the config file
     pass
 def confmake(): #Function to both create and update config file
     global conf
+    conf = [1]
     try:
         with open("config.txt", "w") as file:
             file.write("\n".join(conf))
@@ -276,6 +285,17 @@ def themeset(x): #Changes all of the root ui elements to a theme determined in t
     global textcolor
     global buttonbgc
     global buttonbgca
+    global root
+    global mainlab1
+    global mainlab2
+    global combobox
+    global fslabel
+    global fs1label
+    global fs2label
+    global fs3label
+    global button
+    global button2
+    global button3
     if x == str("0"):
         winbg = "#FFFFFF"
         textcolor = "#000000"
@@ -304,6 +324,89 @@ def themeset(x): #Changes all of the root ui elements to a theme determined in t
     button2.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     button3.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     consout("Theme successfully loaded")
+def makemain():
+    global root
+    global mainlab1
+    global mainlab2
+    global combobox
+    global fslabel
+    global fs1label
+    global fs2label
+    global fs3label
+    global button
+    global button2
+    global button3
+    root = tk.Toplevel(startwin) #Creates the root window
+    root.title("Discord RPC bot v" + str(botver))
+    root.minsize(512, 512)
+    mainlab1 = tk.Label(root, text="Discord RPC bot")
+    mainlab1.pack()
+    mainlab2 = tk.Label(root, text="Version " + str(botver))
+    mainlab2.pack()
+    combobox = ttk.Combobox(root, values=filelist)
+    combobox.set("Please select a status file")
+    combobox.bind("<<ComboboxSelected>>", selection_changed)
+    combobox.pack(padx=5, pady=5, fill="x")
+    fslabel = tk.Label(root, text="Please select a status")
+    fslabel.pack(padx=5, pady=5, fill="x")
+    fs1label = tk.Label(root, text="")
+    fs1label.pack(padx=5, pady=5, fill="x")
+    fs2label = tk.Label(root, text="")
+    fs2label.pack(padx=5, pady=5, fill="x")
+    fs3label = tk.Label(root, text="")
+    fs3label.pack(padx=5, pady=5, fill="x")
+    button = tk.Button(
+        root,
+        text="Start status broadcast",
+        command=buttonclick,
+        state=tk.DISABLED,
+    )
+    button.pack(padx=5, pady=5)
+    button2 = tk.Button(
+        root,
+        text="Subscripts...",
+        command=subscriptbutton,
+    )
+    button2.pack(padx=5, pady=5)
+    button3 = tk.Button(
+        root,
+        text="Settings",
+        command=settings,
+    )
+    button3.pack(padx=5, pady=5)
+    root.protocol("WM_DELETE_WINDOW", onclose)
+    root.after(1, loadconfig)
+def startlogic():
+    global startupwin
+    startwin.withdraw()
+    consout("Running startup checks...")
+    consout("Checking for presence of config file...")
+    activeinput = 1
+    while activeinput == 1:
+        try:
+            with open("config.txt", "r") as file:
+                consout("Config file exists")
+                activeinput = 0
+                pass
+            pass
+        except:
+            consout("File doesn't exist, generating...")
+            confmake()
+            consout("confmake passed, checking again...")
+            pass
+        pass
+    consout("Config check passed")
+    consout("Starting main program...")
+    startupwin.destroy()
+    makemain()
+def startup():
+    global startupwin
+    startupwin = tk.Toplevel(startwin)
+    startupwin.title("Starting...")
+    tk.Label(startupwin, text="Loading RPC bot, please wait...").pack()
+    startupwin.after(1, startlogic)
+def onclose():
+    startwin.destroy()
 startconsoleout()
 filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
@@ -322,43 +425,6 @@ winbg = "0"
 textcolor = "0"
 buttonbgc = "0"
 buttonbgca = "0"
-root = tk.Tk() #Creates the root window
-root.title("Discord RPC bot v" + str(botver))
-root.minsize(512, 512)
-mainlab1 = tk.Label(root, text="Discord RPC bot")
-mainlab1.pack()
-mainlab2 = tk.Label(root, text="Version " + str(botver))
-mainlab2.pack()
-combobox = ttk.Combobox(root, values=filelist)
-combobox.set("Please select a status file")
-combobox.bind("<<ComboboxSelected>>", selection_changed)
-combobox.pack(padx=5, pady=5, fill="x")
-fslabel = tk.Label(root, text="Please select a status")
-fslabel.pack(padx=5, pady=5, fill="x")
-fs1label = tk.Label(root, text="")
-fs1label.pack(padx=5, pady=5, fill="x")
-fs2label = tk.Label(root, text="")
-fs2label.pack(padx=5, pady=5, fill="x")
-fs3label = tk.Label(root, text="")
-fs3label.pack(padx=5, pady=5, fill="x")
-button = tk.Button(
-    root,
-    text="Start status broadcast",
-    command=buttonclick,
-    state=tk.DISABLED,
-)
-button.pack(padx=5, pady=5)
-button2 = tk.Button(
-    root,
-    text="Subscripts...",
-    command=subscriptbutton,
-)
-button2.pack(padx=5, pady=5)
-button3 = tk.Button(
-    root,
-    text="Settings",
-    command=settings,
-)
-button3.pack(padx=5, pady=5)
-root.after(1, loadconfig)
-root.mainloop()
+startwin = tk.Tk()
+startwin.after(1, startup)
+startwin.mainloop()
