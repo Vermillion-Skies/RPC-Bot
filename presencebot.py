@@ -127,7 +127,6 @@ def broadcastend(): #Ends the RPC broadcast
     RPC.close() #Closes endpoint
     consout("Endpoint closed")
     new_window.destroy() #Destroys the broadcast window
-    makemain()
     pass
 def buttonclick(): #Starts the broadcast when button clicked
     broadcaststart()
