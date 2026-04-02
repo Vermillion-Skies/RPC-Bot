@@ -16,6 +16,7 @@ python3 -m venv env
 echo "Environment created"
 source env/bin/activate
 echo "Activated environment"
+pip install --upgrade pip
 pip install pypresence tk requests
 echo "Installed dependencies"
 echo "downloading latest stable files..."
