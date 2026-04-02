@@ -17,9 +17,9 @@ echo "Creating python environment..."
 md %cd%\env
 py -m venv %cd%\env
 echo "Environment created"
-%cd%\env\bin\activate
+CALL %cd%\env\Scripts\activate.bat
 echo "Activated environment"
-pip install pypresence tk requests
+py -m pip install pypresence tk requests
 echo "Installed dependencies"
 echo "downloading latest stable files..."
 cd assets
