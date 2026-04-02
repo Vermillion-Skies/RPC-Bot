@@ -4,7 +4,8 @@ Cross platform Discord Rich Presence application
 
 import toga
 from toga.style.pack import COLUMN, ROW
-
+import pypresence
+from pypresence import Presence
 
 class VermillionRPC(toga.App):
     def startup(self):
@@ -28,8 +29,7 @@ class VermillionRPC(toga.App):
 
         state_box = toga.Box(direction=ROW, margin=5)
         state_box.add(state_label)
-        state_box.add(self.state_input
-        )
+        state_box.add(self.state_input)
         broadcastbutton = toga.Button(
             "Start Broadcast",
             on_press=self.start_broadcast,
@@ -49,7 +49,7 @@ class VermillionRPC(toga.App):
         return("t")
     async def start_broadcast(self, widget):
         if self.start_broadcast_check() == "t":
-            self.rpcstart()
+            rpc.rpcstart()
             await self.main_window.dialog(
                 toga.InfoDialog(
                     "Broadcast started",
@@ -63,9 +63,15 @@ class VermillionRPC(toga.App):
                     "Error undefined"
                 )
             )
-        self.rpcterminate()
+    def requestvalues(self):
+        val = [self.details_input, self.state_input]
+        pass
+    def getid(self):
+        pass
+class rpc(Presence):
     def rpcstart(self):
-        print("RPC session started")
+        rpcparam = VermillionRPC.requestvalues()
+
     def rpcterminate(self):
         print("RPC Session ended")
 
