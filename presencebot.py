@@ -77,7 +77,6 @@ def selection_changed(event): #Changes labels and enables button when dropdown b
 def broadcaststart(): #Begins broadcasting to Discord
     global broadstat
     global new_window
-    root.destroy()
     consout("Starting RPC connection")
     consout("Attempting to open endpoint...")
     try:
