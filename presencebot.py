@@ -428,8 +428,8 @@ if appid == str("fail"): #Quits if the ID fetch fails
 else:
     RPC = Presence(appid) #Sets RPC to run the Presence function using the app ID as a variable
     consout("Application ID loaded successfully")
-botver = str("1.11")
-subsver = str("1.10")
+botver = str("1.20")
+subsver = str("1.20")
 conf = []
 winbg = "0"
 textcolor = "0"
