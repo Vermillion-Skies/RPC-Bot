@@ -415,7 +415,7 @@ def onclose():
     startwin.destroy()
 startconsoleout()
 if os.name == "posix":
-    ospath = "./"
+    ospath = os.getcwd() + "/"
 elif os.name == "nt":
     ospath = os.getcwd() + "\\"
 filelist = os.listdir(ospath + "statuses") #Sets filelist to the files in the statuses directory
