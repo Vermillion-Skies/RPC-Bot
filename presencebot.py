@@ -390,7 +390,7 @@ def startlogic():
     activeinput = 1
     while activeinput == 1:
         try:
-            with open("config.txt", "r") as file:
+            with open(ospath + "config.txt", "r") as file:
                 consout("Config file exists")
                 activeinput = 0
                 pass
@@ -415,9 +415,10 @@ def onclose():
     startwin.destroy()
 startconsoleout()
 if os.name == "posix":
-    filelist = os.listdir("./statuses") #Sets filelist to the files in the statuses directory
+    ospath = "./"
 elif os.name == "nt":
-    filelist = os.listdir("../statuses")
+    ospath = "../"
+filelist = os.listdir(ospath + "statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
 statusfile = str("") #Blanks out the statusfile variable
 appidl = getappid() #Gets the appID in a list
