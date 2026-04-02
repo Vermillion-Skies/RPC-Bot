@@ -138,7 +138,7 @@ def openfile():  #Function to open file dialog and ask for a file path
 def loadconfig():
     global conf
     try:
-        with open("config.txt", "r") as file: #opens the config file
+        with open(ospath + "config.txt", "r") as file: #opens the config file
             conf = file.read().splitlines()
             pass
         if conf[0] == "0":
@@ -166,7 +166,7 @@ def loadconfig():
 def confmake():
     global conf
     try:
-        with open("config.txt", "w") as file:
+        with open(ospath + "config.txt", "w") as file:
             file.write("\n".join(conf))
             pass
         pass
@@ -199,6 +199,10 @@ def themeset(x):
     fileopenbutt.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     filelabel.config(bg=winbg, fg=textcolor)
     filesave.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+if os.name == "posix":
+    ospath = os.getcwd() + "/subscripts/"
+elif os.name == "nt":
+    ospath = os.getcwd() + "\\subscripts\\"
 entrylist = ["null", "null", "null", "null", "null", "null"]
 conf = []
 winbg = "0"

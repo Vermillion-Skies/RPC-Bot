@@ -22,7 +22,7 @@ import requests
 def getappid(): #Gets the application ID defined in pbcred.txt
     consout("Getting app ID...")
     try:
-        with open("pbcred.txt", "r") as file: #Opens pbcred.txt in read-only mode
+        with open(ospath + "pbcred.txt", "r") as file: #Opens pbcred.txt in read-only mode
             return(file.read().splitlines())
             pass
         pass
@@ -50,7 +50,7 @@ def statcode(x, y): #Fetches an indicated line (y) from an indicated file (x)
         line = int(5)
         pass
     try:
-        with open("./statuses/" + str(x), "r") as file: #Opens the selected file in read-only mode
+        with open(ospath + "statuses/" + str(x), "r") as file: #Opens the selected file in read-only mode
             filelist = file.read().splitlines() #Sets the list filelist to every line within the file, with the lines split
             if filelist[line] == str("null"): #If the line has the value "null" it doesn't return anything
                 pass
@@ -135,7 +135,7 @@ def buttonclick(): #Starts the broadcast when button clicked
     pass
 def subscriptbutton(): #Launches subscript loader when button clicked
     consout("Opening subscript launcher...")
-    subprocess.run(["python", "subscripts/subscriptloader.py"], check=True) #Loads subscriptloader.py
+    subprocess.run(["python", ospath + "subscripts/subscriptloader.py"], check=True) #Loads subscriptloader.py
     pass
 def settings(): #Loads settings menu
     global setwin
@@ -237,7 +237,7 @@ def loadconfig(): #Loads the config file
     global conf
     consout("Loading configuration files...")
     try:
-        with open("config.txt", "r") as file: #opens the config file
+        with open(ospath + "config.txt", "r") as file: #opens the config file
             conf = file.read().splitlines()
             pass
         if conf[0] == "0":
@@ -273,10 +273,10 @@ def confmake(x, y): #Function to both create and update config file
     elif x == "n":
         conf = ["1"]
     try:
-        with open("config.txt", "w") as file:
+        with open(ospath + "config.txt", "w") as file:
             file.write("\n".join(conf))
             pass
-        with open("subscripts/config.txt", "w") as file:
+        with open(ospath + "subscripts/config.txt", "w") as file:
             file.write("\n".join(conf))
             pass
         pass
@@ -390,7 +390,7 @@ def startlogic():
     activeinput = 1
     while activeinput == 1:
         try:
-            with open("config.txt", "r") as file:
+            with open(ospath + "config.txt", "r") as file:
                 consout("Config file exists")
                 activeinput = 0
                 pass
@@ -414,7 +414,11 @@ def startup():
 def onclose():
     startwin.destroy()
 startconsoleout()
-filelist = os.listdir("statuses") #Sets filelist to the files in the statuses directory
+if os.name == "posix":
+    ospath = os.getcwd() + "/"
+elif os.name == "nt":
+    ospath = os.getcwd() + "\\"
+filelist = os.listdir(ospath + "statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
 statusfile = str("") #Blanks out the statusfile variable
 appidl = getappid() #Gets the appID in a list

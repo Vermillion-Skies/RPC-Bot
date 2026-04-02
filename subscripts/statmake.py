@@ -88,7 +88,7 @@ def entrystdone(event):
 def loadconfig():
     global conf
     try:
-        with open("config.txt", "r") as file: #opens the config file
+        with open(ospath + "config.txt", "r") as file: #opens the config file
             conf = file.read().splitlines()
             pass
         if conf[0] == "0":
@@ -116,7 +116,7 @@ def loadconfig():
 def confmake():
     global conf
     try:
-        with open("config.txt", "w") as file:
+        with open(ospath + "config.txt", "w") as file:
             file.write("\n".join(conf))
             pass
         pass
@@ -149,6 +149,10 @@ def themeset(x):
     buttonsave.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     buttonclose.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     buttonreset.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+if os.name == "posix":
+    ospath = os.getcwd() + "/subscripts/"
+elif os.name == "nt":
+    ospath = os.getcwd() + "\\subscripts\\"
 conf = []
 winbg = "0"
 textcolor = "0"

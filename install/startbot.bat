@@ -1,3 +1,5 @@
 CALL %cd%\env\Scripts\activate.bat
-py %cd%\assets\presencebot.py
+cd %cd%\assets
+py %cd%\presencebot.py
+cd ../
 CALL %cd%\env\Scripts\deactivate.bat

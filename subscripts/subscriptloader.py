@@ -11,11 +11,11 @@ import sys
 import subprocess
 def ctbuttoncick():
     root.destroy()
-    subprocess.run(["python", "subscripts/statmake.py"], check=True)
+    subprocess.run(["python", ospath + "statmake.py"], check=True)
     pass
 def smbuttonclick():
     root.destroy()
-    subprocess.run(["python", "subscripts/statedit.py"], check=True)
+    subprocess.run(["python", ospath + "statedit.py"], check=True)
     pass
 def exit():
     root.destroy()
@@ -23,7 +23,7 @@ def exit():
 def loadconfig():
     global conf
     try:
-        with open("config.txt", "r") as file: #opens the config file
+        with open(ospath + "config.txt", "r") as file: #opens the config file
             conf = file.read().splitlines()
             pass
         if conf[0] == "0":
@@ -51,7 +51,7 @@ def loadconfig():
 def confmake():
     global conf
     try:
-        with open("config.txt", "w") as file:
+        with open(ospath + "config.txt", "w") as file:
             file.write("\n".join(conf))
             pass
         pass
@@ -83,6 +83,10 @@ def themeset(x):
     statmakebutton.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     stateditbutton.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
     exitbutton.config(activebackground=buttonbgca, bg=buttonbgc, fg=textcolor)
+if os.name == "posix":
+    ospath = os.getcwd() + "/subscripts/"
+elif os.name == "nt":
+    ospath = os.getcwd() + "\\subscripts\\"
 conf = []
 winbg = "0"
 textcolor = "0"
