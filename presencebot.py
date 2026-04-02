@@ -417,7 +417,7 @@ startconsoleout()
 if os.name == "posix":
     ospath = "./"
 elif os.name == "nt":
-    ospath = "../"
+    ospath = os.getcwd() + "\\"
 filelist = os.listdir(ospath + "statuses") #Sets filelist to the files in the statuses directory
 consout("Files in status directory: " + str(filelist))
 statusfile = str("") #Blanks out the statusfile variable
