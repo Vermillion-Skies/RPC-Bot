@@ -20,6 +20,16 @@ class VermillionRPC(toga.App):
         details_box.add(details_label)
         details_box.add(self.details_input)
 
+        state_label = toga.Label(
+            "State: ",
+            margin=(0, 5),
+        )
+        self.state_input = toga.TextInput(flex=1)
+
+        state_box = toga.Box(direction=ROW, margin=5)
+        state_box.add(state_label)
+        state_box.add(self.state_input
+        )
         broadcastbutton = toga.Button(
             "Start Broadcast",
             on_press=self.start_broadcast,
@@ -27,14 +37,32 @@ class VermillionRPC(toga.App):
         )
 
         main_box.add(details_box)
+        main_box.add(state_box)
         main_box.add(broadcastbutton)
 
         self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = main_box
         self.main_window.show()
-    
-    def start_broadcast(self, widget):
-        print(f"Details= {self.details_input.value}")
+    def start_broadcast_check(self):
+        # Modify this to check APP ID, connection to RPC, and other things if needed
+        print("testing shit")
+        return("n")
+    async def start_broadcast(self, widget):
+        if self.start_broadcast_check() == "t":
+            await self.main_window.dialog(
+                toga.InfoDialog(
+                    "Broadcast started",
+                    "Close the window to end the broadcast",
+                )
+            )
+        else:
+            await self.main_window.dialog(
+                toga.InfoDialog(
+                    "Broadcast start failed",
+                    "Error undefined"
+                )
+            )
+        print("test")
 
 
 def main():
