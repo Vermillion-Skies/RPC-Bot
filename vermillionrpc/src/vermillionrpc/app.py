@@ -46,9 +46,10 @@ class VermillionRPC(toga.App):
     def start_broadcast_check(self):
         # Modify this to check APP ID, connection to RPC, and other things if needed
         print("testing shit")
-        return("n")
+        return("t")
     async def start_broadcast(self, widget):
         if self.start_broadcast_check() == "t":
+            self.rpcstart()
             await self.main_window.dialog(
                 toga.InfoDialog(
                     "Broadcast started",
@@ -62,7 +63,11 @@ class VermillionRPC(toga.App):
                     "Error undefined"
                 )
             )
-        print("test")
+        self.rpcterminate()
+    def rpcstart(self):
+        print("RPC session started")
+    def rpcterminate(self):
+        print("RPC Session ended")
 
 
 def main():
