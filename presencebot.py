@@ -19,6 +19,7 @@ import os
 import sys
 import subprocess
 import requests
+import platform
 def getappid(): #Gets the application ID defined in pbcred.txt
     consout("Getting app ID...")
     try:
