@@ -209,7 +209,7 @@ winbg = "0"
 textcolor = "0"
 buttonbgc = "0"
 buttonbgca = "0"
-ver = str("1.10")
+ver = str("1.20")
 statfile = str("null")
 root = tk.Tk()
 root.title("Status edit tool v" + str(ver))

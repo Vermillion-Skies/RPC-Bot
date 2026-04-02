@@ -159,7 +159,7 @@ textcolor = "0"
 buttonbgc = "0"
 buttonbgca = "0"
 entrylist = ["null", "null", "null", "null", "null", "null"]
-ver = str("1.10")
+ver = str("1.20")
 root = tk.Tk()
 root.title("Status creation tool v" + str(ver))
 root.minsize(720, 720)
