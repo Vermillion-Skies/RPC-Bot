@@ -3,7 +3,7 @@ Cross-platform Discord presence app
 """
 
 import toga
-from toga.style.pack import COLUMN, ROW, Pack
+from toga.style.pack import COLUMN, ROW, CENTER, Pack
 from toga.constants import Direction
 
 
@@ -12,39 +12,78 @@ class VermillionRPC(toga.App):
         # Column to show status files
         filecol = toga.Box(
             style=Pack(
-                margin=(0, 75)
-            )
+                margin=(
+                    0, 
+                    75
+                ),
+                direction=COLUMN
+            ),
+            children=[
+                toga.Label(
+                    "Saved Statuses"
+                ),
+                toga.Label(
+                    "File One"
+                )
+            ]
         )
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
-                margin=(0, 5)
-            )
+                margin=(
+                    200,
+                    300
+                ),
+                direction=COLUMN,
+                justify_content=CENTER,
+            ),
+            children=[
+                toga.Label(
+                    "File contents"
+                ),
+                toga.Label(
+                    "Details"
+                ),
+                toga.Label(
+                    "State"
+                ),
+                toga.Label(
+                    "Large image internal code"
+                ),
+                toga.Label(
+                    "Large image hover text"
+                ),
+                toga.Label(
+                    "Small image internal code"
+                ),
+                toga.Label(
+                    "Small image hover text"
+                )
+            ]
         )
         # Controls for the RPC broadcast
         broadcastcont = toga.Box(
             style=Pack(
-                margin=(0,5),
-            )
+                margin=(
+                    0, 
+                    0
+                ),
+                direction=COLUMN,
+            ),
+            children=[
+                toga.Button(
+                    "Start Broadcast"
+                ),
+                toga.Button(
+                    "End Broadcast",
+                    enabled=False
+                )
+            ]
         )
-        # Starts RPC broadcast
-        bcs = toga.Button(
-            "Start broadcast"
-        )
-        # Ends RPC broadcast
-        bce = toga.Button(
-            "End broadcast"
-        )
-        broadcastcont.add(
-            bcs,
-            bce
-        )
-        filecol.add(toga.Label("Statuses"))
-        contentbox.add(toga.Label("Contents"))
         rightsplit = toga.SplitContainer(
             content=[
-                contentbox,
-                broadcastcont
+                (contentbox, 9),
+                (broadcastcont, 1)
             ],
             direction=Direction.HORIZONTAL
         )
