@@ -9,6 +9,8 @@ from toga.constants import Direction
 
 class VermillionRPC(toga.App):
     def startup(self):
+        # Declares window title and existence
+        self.main_window = toga.MainWindow(title=self.formal_name)
         # Column to show status files
         filecol = toga.Box(
             style=Pack(
@@ -93,11 +95,29 @@ class VermillionRPC(toga.App):
                 rightsplit
             ]
         )
+        prefs_menu = toga.Command(
+            self.openprefsmenu,
+            text="Preferences",
+            tooltip="Manage configuration",
+            section=0
+        )
+        self.commands.add(prefs_menu)
         main_box = toga.Box()
         main_box.add(fullsplit)
-        self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = main_box
         self.main_window.show()
+    def openprefsmenu(self, widget):
+        prefswindow = toga.Window(
+            title="Preferences"
+        )
+        prefswindow.content = toga.Box(
+            children=[
+                toga.Label(
+                    "Prefs menu still in development"
+                ),
+            ],
+        )
+        prefswindow.show()
 
 
 def main():
