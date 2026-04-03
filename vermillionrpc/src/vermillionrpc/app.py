@@ -139,14 +139,16 @@ class VermillionRPC(toga.App):
         self.main_window.show()
     # Command to make and open the preferences menu
     def openprefsmenu(self, widget):
+        self.appid_input = toga.TextInput(flex=1)
         prefswindow = toga.Window(
             title="Preferences"
         )
         prefswindow.content = toga.Box(
             children=[
                 toga.Label(
-                    "Prefs menu still in development"
+                    "App ID: "
                 ),
+                self.appid_input,
             ],
         )
         prefswindow.show()
@@ -158,7 +160,7 @@ class VermillionRPC(toga.App):
         statmakewin.content = toga.Box(
             children=[
                 toga.Label(
-                    "Statmake is still in development"
+                    "Statmake still in development"
                 )
             ]
         )
