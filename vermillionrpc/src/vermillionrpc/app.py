@@ -1,7 +1,8 @@
 """
 Cross-platform Discord presence app
 """
-
+import pathlib
+from pathlib import Path
 import toga
 from toga.style.pack import COLUMN, ROW, CENTER, Pack
 from toga.constants import Direction
@@ -144,14 +145,34 @@ class VermillionRPC(toga.App):
             title="Preferences"
         )
         prefswindow.content = toga.Box(
+            direction=COLUMN,
             children=[
                 toga.Label(
                     "App ID: "
                 ),
                 self.appid_input,
+                toga.Button(
+                    "Save changes",
+                    on_press=self.savesettings
+                )
             ],
         )
+        # Checks if the app ID config exists. If so, sets the value of appid_input to the inputted ID
+        path = self.paths.data / "appid.toml"
+        if not path.exists():
+            pass
+        else:
+            self.appid_input.value = path.read_text(
+                encoding="utf-8"
+            )
         prefswindow.show()
+    def savesettings(self, widget):
+        path = self.paths.data / "appid.toml"
+        path.write_text(
+            self.appid_input.value, 
+            encoding='utf-8'
+        )
+        print("Button triggered!")
     # Command to open statmake tool
     def openstatmake(self, widget):
         statmakewin = toga.Window(
