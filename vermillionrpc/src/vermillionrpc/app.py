@@ -165,7 +165,17 @@ class VermillionRPC(toga.App):
         statmakewin.show()
     # Command to open statedit tool
     def openstatedit(self, widget):
-        pass
+        stateditwin = toga.Window(
+            title="Statedit"
+        )
+        stateditwin.content = toga.Box(
+            children=[
+                toga.Label(
+                    "Statedit is still in development"
+                )
+            ]
+        )
+        stateditwin.show()
 
 
 def main():
