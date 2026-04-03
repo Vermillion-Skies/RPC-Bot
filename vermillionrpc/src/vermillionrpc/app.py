@@ -152,7 +152,17 @@ class VermillionRPC(toga.App):
         prefswindow.show()
     # Command to open statmake tool
     def openstatmake(self, widget):
-        pass
+        statmakewin = toga.Window(
+            title="Statmake"
+        )
+        statmakewin.content = toga.Box(
+            children=[
+                toga.Label(
+                    "Statmake is still in development"
+                )
+            ]
+        )
+        statmakewin.show()
     # Command to open statedit tool
     def openstatedit(self, widget):
         pass
