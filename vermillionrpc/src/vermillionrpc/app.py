@@ -172,7 +172,6 @@ class VermillionRPC(toga.App):
             self.appid_input.value, 
             encoding='utf-8'
         )
-        print("Button triggered!")
     # Command to open statmake tool
     def openstatmake(self, widget):
         statmakewin = toga.Window(
