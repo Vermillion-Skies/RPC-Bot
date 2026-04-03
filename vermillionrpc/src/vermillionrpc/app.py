@@ -95,7 +95,17 @@ class VermillionRPC(toga.App):
                 rightsplit
             ]
         )
-        maingroup = Group("RPC Settings", order=40)
+        # Adds a custom settings group to the toolbar
+        maingroup = Group(
+            "RPC Settings", 
+            order=40
+        )
+        # Adds a custom status management subgroup to the toolbar
+        mgstat = Group(
+            "Status management...", 
+            parent=maingroup, 
+            order=10
+        )
         # Command to index the preferences command to the toolbar
         prefs_menu = toga.Command(
             self.openprefsmenu,
@@ -104,8 +114,25 @@ class VermillionRPC(toga.App):
             group=maingroup,
             section=0
         )
-        # Command to open
+        # Command to index the statmake command to the toolbar
+        statmake_menu = toga.Command(
+            self.openstatmake,
+            text="Statmake",
+            tooltip="Make a new status file",
+            group=mgstat,
+            order=1
+        )
+        # Command to index the statedit command to the toolbar
+        statedit_menu = toga.Command(
+            self.openstatedit,
+            text="Statedit",
+            tooltip="Edit an existing status file",
+            group=mgstat,
+            order=2
+        )
         self.commands.add(prefs_menu)
+        self.commands.add(statmake_menu)
+        self.commands.add(statedit_menu)
         main_box = toga.Box()
         main_box.add(fullsplit)
         self.main_window.content = main_box
@@ -123,6 +150,12 @@ class VermillionRPC(toga.App):
             ],
         )
         prefswindow.show()
+    # Command to open statmake tool
+    def openstatmake(self, widget):
+        pass
+    # Command to open statedit tool
+    def openstatedit(self, widget):
+        pass
 
 
 def main():
