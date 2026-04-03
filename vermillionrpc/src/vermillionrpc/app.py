@@ -5,7 +5,7 @@ Cross-platform Discord presence app
 import toga
 from toga.style.pack import COLUMN, ROW, CENTER, Pack
 from toga.constants import Direction
-
+from toga.command import Group
 
 class VermillionRPC(toga.App):
     def startup(self):
@@ -95,17 +95,22 @@ class VermillionRPC(toga.App):
                 rightsplit
             ]
         )
+        maingroup = Group("RPC Settings", order=40)
+        # Command to index the preferences command to the toolbar
         prefs_menu = toga.Command(
             self.openprefsmenu,
             text="Preferences",
             tooltip="Manage configuration",
+            group=maingroup,
             section=0
         )
+        # Command to open
         self.commands.add(prefs_menu)
         main_box = toga.Box()
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
+    # Command to make and open the preferences menu
     def openprefsmenu(self, widget):
         prefswindow = toga.Window(
             title="Preferences"
