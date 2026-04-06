@@ -13,6 +13,12 @@ class VermillionRPC(toga.App):
     def startup(self):
         global startbroadbutton
         global endbroadbutton
+        global contentd
+        global contents
+        global contentli
+        global contentlt
+        global contentsi
+        global contentst
         # Declares window title and existence
         self.main_window = toga.MainWindow(title=self.formal_name)
         # Column to show status files
@@ -74,25 +80,33 @@ class VermillionRPC(toga.App):
                 toga.Label(
                     "File contents"
                 ),
-                toga.Label(
-                    "Details"
-                ),
-                toga.Label(
-                    "State"
-                ),
-                toga.Label(
-                    "Large image internal code"
-                ),
-                toga.Label(
-                    "Large image hover text"
-                ),
-                toga.Label(
-                    "Small image internal code"
-                ),
-                toga.Label(
-                    "Small image hover text"
-                )
             ]
+        )
+        contentd = toga.Label(
+            "Details"
+        )
+        contents = toga.Label(
+            "State"
+        )
+        contentli = toga.Label(
+            "Large image internal code"
+        )
+        contentlt = toga.Label(
+            "Large image hover text"
+        )
+        contentsi = toga.Label(
+            "Small image internal code"
+        )
+        contentst = toga.Label(
+            "Small image hover text"
+        )
+        contentbox.add(
+            contentd,
+            contents,
+            contentli,
+            contentlt,
+            contentsi,
+            contentst
         )
         startbroadbutton = toga.Button(
             "Start Broadcast",
