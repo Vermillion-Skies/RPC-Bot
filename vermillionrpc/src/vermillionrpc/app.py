@@ -8,6 +8,7 @@ from toga.sources import ListSource
 from toga.style.pack import COLUMN, ROW, CENTER, Pack
 from toga.constants import Direction
 from toga.command import Group
+import os
 
 class VermillionRPC(toga.App):
     def startup(self):
@@ -36,32 +37,6 @@ class VermillionRPC(toga.App):
                     "Saved Statuses"
                 )
             ])
-        # Get status files from app data directory
-        datadir = self.paths.data
-        # List .txt files in app data folder
-        files = [
-            f.name for f in datadir.glob(
-                "*.txt"
-            )]
-        self.file_source = ListSource(
-            accessors=[
-                "filename"
-            ],
-            data=[
-                {
-                    "filename": f
-                } 
-                for f in files
-            ])
-        self.filetable = toga.Table(
-            headings=[
-                "Status files"
-            ],
-            data=self.file_source,
-            on_select=self.fileselect,
-            style=Pack(flex=1))
-        filecol.add(
-            self.filetable)
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
@@ -166,10 +141,6 @@ class VermillionRPC(toga.App):
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
-    # Command to handle file selection
-    def fileselect(self, widget, row):
-        if row:
-            print(f"Selected: {row.filename}")
     # Command to start the presence broadcast
     async def startbroadcast(self, widget):
         startbroadbutton.enabled = False
