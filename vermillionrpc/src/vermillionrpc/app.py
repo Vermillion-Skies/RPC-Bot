@@ -163,19 +163,88 @@ class VermillionRPC(toga.App):
     def filechanged(self, widget):
         selectedfile = self.filetable.selection
         path = self.paths.data / selectedfile.file
-        entrylist = []
+        self.entrylist = []
         try:
             with open(path, "r") as file:
-                entrylist = [line.strip() for line in file]
+                self.entrylist = [line.strip() for line in file]
         except:
             pass
-        print(entrylist)
-        self.contentd.text = entrylist[0]
-        self.contents.text = entrylist[1]
-        self.contentli.text = entrylist[2]
-        self.contentlt.text = entrylist[3]
-        self.contentsi.text = entrylist[4]
-        self.contentst.text = entrylist[5]
+        print(self.entrylist)
+        try:
+            if self.entrylist[0] == "":
+                self.contentd.text = "Empty line"
+            else:
+                self.contentd.text = self.entrylist[0]
+        except Exception as e:
+            if str(e) == "list index out of range":
+                self.entrylist.append("null")
+                self.contentd.text = "Empty line"
+            else:
+                self.crashcode = "0"
+                self.crashwindow()
+        try:
+            if self.entrylist[1] == "":
+                self.contents.text = "Empty line"
+            else:
+                self.contents.text = self.entrylist[1]
+        except Exception as e:
+            if str(e) == "list index out of range":
+                self.entrylist.append("null")
+                self.contents.text = "Empty line"
+            else:
+                self.crashcode = "0"
+                self.crashwindow()
+        try:
+            if self.entrylist[2] == "":
+                self.contentli.text = "Empty line"
+            else:
+                self.contentli.text = self.entrylist[2]
+        except Exception as e:
+            if str(e) == "list index out of range":
+                self.entrylist.append("null")
+                self.contentli.text = "Empty line"
+            else:
+                self.crashcode = "0"
+                self.crashwindow()
+        try:
+            if self.entrylist[3] == "":
+                self.contentlt.text = "Empty line"
+            else:
+                self.contentlt.text = self.entrylist[3]
+        except Exception as e:
+            if str(e) == "list index out of range":
+                self.entrylist.append("null")
+                self.contentlt.text = "Empty Line"
+            else:
+                self.crashcode = "0"
+                self.crashwindow()
+        try:
+            if self.entrylist[4] == "":
+                self.contentsi.text = "Empty line"
+            else:
+                self.contentsi.text = self.entrylist[4]
+        except Exception as e:
+            if str(e) == "list index out of range":
+                self.entrylist.append("null")
+                self.contentsi.text = "Empty line"
+            else:
+                self.crashcode = "0"
+                self.crashwindow()
+        try:
+            if self.entrylist[5] == "":
+                self.contentst.text = "Empty line"
+            else:
+                self.contentst.text = self.entrylist[5]
+        except Exception as e:
+            if str(e) == "list index out of range":
+                self.entrylist.append("null")
+                self.contentst.text = "Empty line"
+            else:
+                self.crashcode = "0"
+                self.crashwindow()
+    # Command for showing an error window
+    async def crashwindow(self, widget):
+        pass
     # Command to start the presence broadcast
     async def startbroadcast(self, widget):
         startbroadbutton.enabled = False
