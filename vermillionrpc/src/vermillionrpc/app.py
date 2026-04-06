@@ -9,7 +9,12 @@ from toga.style.pack import COLUMN, ROW, CENTER, Pack
 from toga.constants import Direction
 from toga.command import Group
 import os
-
+import pypresence
+from pypresence import Presence
+import asyncio
+import threading
+import tracemalloc
+import time
 class VermillionRPC(toga.App):
     def startup(self):
         global startbroadbutton
@@ -244,16 +249,60 @@ class VermillionRPC(toga.App):
                 self.crashwindow()
     # Command for showing an error window
     async def crashwindow(self, widget):
-        pass
-    # Command to start the presence broadcast
+        if self.errorcode == "1":
+            errortext = "Failed to start RPC: No appID found"
+        if self.errortype == "0":
+            await self.main_window.dialog(
+                toga.InfoDialog(
+                    "Error (non-fatal)",
+                    errortext
+                )
+            )
+        elif self.errortype == "1":
+            await self.main_window.dialog(
+                toga.InfoDialog(
+                    "Error (fatal)",
+                    errortext
+                )
+            )
+            quit()
+    # Command to start the RPC thread
     async def startbroadcast(self, widget):
+        task = asyncio.create_task(self.broadcastthread())
+        await task
+        #thread = threading.Thread(target=self.broadcastthread)
+        #tracemalloc.start()
+        #thread.run()
+    # Command to start the presence broadcast
+    async def broadcastthread(self):
         startbroadbutton.enabled = False
         endbroadbutton.enabled = True
-        await self.main_window.dialog(
-            toga.InfoDialog(
-                "Error: Broadcast not started",
-                "Broadcast code is still in development."
-            ))
+        path = self.paths.config / "appid.toml"
+        if not path.exists():
+            self.errorcode = "1"
+            self.errortype = "0"
+            self.crashwindow()
+        else:
+            appid = path.read_text(
+                encoding="utf-8")
+            RPC = Presence(appid)
+            try:
+                RPC.connect()
+                starttime = time.time()
+                try:
+                    RPC.update(
+                        details=self.contentd.value,
+                        state=self.contents.value,
+                        large_image=self.contentli.value,
+                        large_text=self.contentlt.value,
+                        small_image=self.contentsi.value,
+                        small_text=self.contentst.value,
+                        start=starttime
+                    )
+                except Exception as e:
+                    print(str(e))
+            except Exception as e:
+                print(str(e))
     # Command to end the presence broadcast
     async def endbroadcast(self, widget):
         startbroadbutton.enabled = True
@@ -394,7 +443,5 @@ class VermillionRPC(toga.App):
                 )
             ])
         stateditwin.show()
-
-
 def main():
     return VermillionRPC()
