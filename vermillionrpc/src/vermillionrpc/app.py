@@ -20,7 +20,8 @@ class VermillionRPC(toga.App):
         global contentsi
         global contentst
         # Declares window title and existence
-        self.main_window = toga.MainWindow(title=self.formal_name)
+        self.main_window = toga.MainWindow(
+            title=self.formal_name)
         # Column to show status files
         filecol = toga.Box(
             style=Pack(
@@ -34,16 +35,14 @@ class VermillionRPC(toga.App):
                 toga.Label(
                     "Saved Statuses"
                 )
-            ]
-        )
+            ])
         # Get status files from app data directory
         datadir = self.paths.data
         # List .txt files in app data folder
         files = [
             f.name for f in datadir.glob(
                 "*.txt"
-            )
-        ]
+            )]
         self.file_source = ListSource(
             accessors=[
                 "filename"
@@ -53,23 +52,20 @@ class VermillionRPC(toga.App):
                     "filename": f
                 } 
                 for f in files
-            ]
-        )
+            ])
         self.filetable = toga.Table(
             headings=[
                 "Status files"
             ],
             data=self.file_source,
             on_select=self.fileselect,
-            style=Pack(flex=1)
-        )
+            style=Pack(flex=1))
         filecol.add(
-            self.filetable
-        )
+            self.filetable)
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
-                padding=(
+                margin=(
                     200,
                     300
                 ),
@@ -80,44 +76,34 @@ class VermillionRPC(toga.App):
                 toga.Label(
                     "File contents"
                 ),
-            ]
-        )
+            ])
         contentd = toga.Label(
-            "Details"
-        )
+            "Details")
         contents = toga.Label(
-            "State"
-        )
+            "State")
         contentli = toga.Label(
-            "Large image internal code"
-        )
+            "Large image internal code")
         contentlt = toga.Label(
-            "Large image hover text"
-        )
+            "Large image hover text")
         contentsi = toga.Label(
-            "Small image internal code"
-        )
+            "Small image internal code")
         contentst = toga.Label(
-            "Small image hover text"
-        )
+            "Small image hover text")
         contentbox.add(
             contentd,
             contents,
             contentli,
             contentlt,
             contentsi,
-            contentst
-        )
+            contentst)
         startbroadbutton = toga.Button(
             "Start Broadcast",
             on_press=self.startbroadcast,
-            enabled=True
-        )
+            enabled=True)
         endbroadbutton = toga.Button(
             "End Broadcast",
             on_press=self.endbroadcast,
-            enabled=False
-        )
+            enabled=False)
         # Controls for the RPC broadcast
         broadcastcont = toga.Box(
             style=Pack(
@@ -130,66 +116,60 @@ class VermillionRPC(toga.App):
             children=[
                 startbroadbutton,
                 endbroadbutton
-            ]
-        )
+            ])
         rightsplit = toga.SplitContainer(
             content=[
                 (contentbox, 9),
                 (broadcastcont, 1)
             ],
-            direction=Direction.HORIZONTAL
-        )
+            direction=Direction.HORIZONTAL)
         fullsplit = toga.SplitContainer(
             content=[
                 filecol,
                 rightsplit
-            ]
-        )
+            ])
         # Adds a custom settings group to the toolbar
         maingroup = Group(
             "RPC Settings", 
-            order=40
-        )
+            order=40)
         # Adds a custom status management subgroup to the toolbar
         mgstat = Group(
             "Status management...", 
             parent=maingroup, 
-            order=10
-        )
+            order=10)
         # Command to index the preferences command to the toolbar
         prefs_menu = toga.Command(
             self.openprefsmenu,
             text="Preferences",
             tooltip="Manage configuration",
             group=maingroup,
-            section=0
-        )
+            section=0)
         # Command to index the statmake command to the toolbar
         statmake_menu = toga.Command(
             self.openstatmake,
             text="Statmake",
             tooltip="Make a new status file",
             group=mgstat,
-            order=1
-        )
+            order=1)
         # Command to index the statedit command to the toolbar
         statedit_menu = toga.Command(
             self.openstatedit,
             text="Statedit",
             tooltip="Edit an existing status file",
             group=mgstat,
-            order=2
-        )
-        self.commands.add(prefs_menu)
-        self.commands.add(statmake_menu)
-        self.commands.add(statedit_menu)
+            order=2)
+        self.commands.add(
+            prefs_menu,
+            statmake_menu,
+            statedit_menu)
         main_box = toga.Box()
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
     # Command to handle file selection
-    def fileselect(self, widget):
-        pass
+    def fileselect(self, widget, row):
+        if row:
+            print(f"Selected: {row.filename}")
     # Command to start the presence broadcast
     async def startbroadcast(self, widget):
         startbroadbutton.enabled = False
@@ -198,8 +178,7 @@ class VermillionRPC(toga.App):
             toga.InfoDialog(
                 "Error: Broadcast not started",
                 "Broadcast code is still in development."
-            )
-        )
+            ))
     # Command to end the presence broadcast
     async def endbroadcast(self, widget):
         startbroadbutton.enabled = True
@@ -208,14 +187,12 @@ class VermillionRPC(toga.App):
             toga.InfoDialog(
                 "Error: Broadcast not ended",
                 "Broadcast code is still in development"
-            )
-        )
+            ))
     # Command to make and open the preferences menu
     def openprefsmenu(self, widget):
         self.appid_input = toga.TextInput(flex=1)
         prefswindow = toga.Window(
-            title="Preferences"
-        )
+            title="Preferences")
         prefswindow.content = toga.Box(
             direction=COLUMN,
             children=[
@@ -227,8 +204,7 @@ class VermillionRPC(toga.App):
                     "Save changes",
                     on_press=self.savesettings
                 )
-            ],
-        )
+            ],)
         # Checks if the app ID config exists. If so, sets the value of appid_input to the inputted ID
         path = self.paths.config / "appid.toml"
         if not path.exists():
@@ -243,33 +219,28 @@ class VermillionRPC(toga.App):
         path = self.paths.config / "appid.toml"
         path.write_text(
             self.appid_input.value, 
-            encoding='utf-8'
-        )
+            encoding='utf-8')
     # Command to open statmake tool
     def openstatmake(self, widget):
         statmakewin = toga.Window(
-            title="Statmake"
-        )
+            title="Statmake")
         statmakewin.content = toga.Box(
             children=[
                 toga.Label(
                     "Statmake still in development"
                 )
-            ]
-        )
+            ])
         statmakewin.show()
     # Command to open statedit tool
     def openstatedit(self, widget):
         stateditwin = toga.Window(
-            title="Statedit"
-        )
+            title="Statedit")
         stateditwin.content = toga.Box(
             children=[
                 toga.Label(
                     "Statedit is still in development"
                 )
-            ]
-        )
+            ])
         stateditwin.show()
 
 
