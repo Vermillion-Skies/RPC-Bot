@@ -63,7 +63,7 @@ class VermillionRPC(toga.App):
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
-                margin=(
+                padding=(
                     200,
                     300
                 ),
