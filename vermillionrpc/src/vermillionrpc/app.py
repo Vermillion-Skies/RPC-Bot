@@ -175,6 +175,7 @@ class VermillionRPC(toga.App):
                 encoding="utf-8"
             )
         prefswindow.show()
+    # Command to save your settings to local appdata folder
     def savesettings(self, widget):
         path = self.paths.data / "appid.toml"
         path.write_text(
