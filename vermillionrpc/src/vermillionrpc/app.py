@@ -37,6 +37,26 @@ class VermillionRPC(toga.App):
                     "Saved Statuses"
                 )
             ])
+        # Make a table with contents of app data folder
+        datadir = self.paths.data
+        files = os.listdir(datadir)
+        table = toga.Table(
+            headings=[
+                "Files"
+            ],
+            accessors={
+                "file"
+            },
+        )
+        for item in files:
+            table.data.append(
+                {
+                    "file": item
+                }
+            )
+        filecol.add(
+            table
+        )
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
