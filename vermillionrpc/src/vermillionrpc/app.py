@@ -224,12 +224,59 @@ class VermillionRPC(toga.App):
     def openstatmake(self, widget):
         statmakewin = toga.Window(
             title="Statmake")
+        self.ninput = toga.TextInput(
+            flex=1)
+        self.dinput = toga.TextInput(
+            flex=1)
+        self.sinput = toga.TextInput(
+            flex=1)
+        self.liinput = toga.TextInput(
+            flex=1)
+        self.ltinput = toga.TextInput(
+            flex=1)
+        self.siinput = toga.TextInput(
+            flex=1)
+        self.stinput = toga.TextInput(
+            flex=1)
         statmakewin.content = toga.Box(
+            direction=COLUMN,
             children=[
                 toga.Label(
-                    "Statmake still in development"
+                    "Statmake tool"
+                ),
+                toga.Label(
+                    "Status Name:"
+                ),
+                self.ninput,
+                toga.Label(
+                    "Details:"
+                ),
+                self.dinput,
+                toga.Label(
+                    "State:"
+                ),
+                self.sinput,
+                toga.Label(
+                    "Large image code:"
+                ),
+                self.liinput,
+                toga.Label(
+                    "Large image hover text"
+                ),
+                self.ltinput,
+                toga.Label(
+                    "Small image code:"
+                ),
+                self.siinput,
+                toga.Label(
+                    "Small image hover text:"
+                ),
+                self.stinput,
+                toga.Button(
+                    "Save status",
                 )
             ])
+        
         statmakewin.show()
     # Command to open statedit tool
     def openstatedit(self, widget):
