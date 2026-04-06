@@ -21,6 +21,7 @@ test_sources = [
 ]
 
 requires = [
+    "pypresence",
 ]
 test_requires = [
     "pytest",
