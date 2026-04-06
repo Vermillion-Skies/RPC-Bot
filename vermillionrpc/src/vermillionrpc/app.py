@@ -26,11 +26,9 @@ class VermillionRPC(toga.App):
         # Column to show status files
         filecol = toga.Box(
             style=Pack(
-                margin=(
-                    0, 
-                    0
-                ),
-                direction=COLUMN
+                flex=1,
+                direction=COLUMN,
+                width=300
             ),
             children=[
                 toga.Label(
@@ -41,6 +39,9 @@ class VermillionRPC(toga.App):
         datadir = self.paths.data
         files = os.listdir(datadir)
         self.filetable = toga.Table(
+            style=Pack(
+                flex=1,
+            ),
             headings=[
                 "Files"
             ],
@@ -61,11 +62,8 @@ class VermillionRPC(toga.App):
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
-                margin=(
-                    200,
-                    300
-                ),
                 direction=COLUMN,
+                flex=1,
                 justify_content=CENTER,
             ),
             children=[
@@ -95,19 +93,18 @@ class VermillionRPC(toga.App):
         startbroadbutton = toga.Button(
             "Start Broadcast",
             on_press=self.startbroadcast,
-            enabled=True)
+            enabled=True,
+            flex=1)
         endbroadbutton = toga.Button(
             "End Broadcast",
             on_press=self.endbroadcast,
-            enabled=False)
+            enabled=False,
+            flex=1)
         # Controls for the RPC broadcast
         broadcastcont = toga.Box(
             style=Pack(
-                margin=(
-                    0, 
-                    0
-                ),
                 direction=COLUMN,
+                flex=1
             ),
             children=[
                 startbroadbutton,
@@ -115,8 +112,8 @@ class VermillionRPC(toga.App):
             ])
         rightsplit = toga.SplitContainer(
             content=[
-                (contentbox, 9),
-                (broadcastcont, 1)
+                (contentbox, 8),
+                (broadcastcont, 2)
             ],
             direction=Direction.HORIZONTAL)
         fullsplit = toga.SplitContainer(
