@@ -222,7 +222,7 @@ class VermillionRPC(toga.App):
             encoding='utf-8')
     # Command to open statmake tool
     def openstatmake(self, widget):
-        statmakewin = toga.Window(
+        self.statmakewin = toga.Window(
             title="Statmake")
         self.ninput = toga.TextInput(
             flex=1)
@@ -238,7 +238,7 @@ class VermillionRPC(toga.App):
             flex=1)
         self.stinput = toga.TextInput(
             flex=1)
-        statmakewin.content = toga.Box(
+        self.statmakewin.content = toga.Box(
             direction=COLUMN,
             children=[
                 toga.Label(
@@ -274,10 +274,40 @@ class VermillionRPC(toga.App):
                 self.stinput,
                 toga.Button(
                     "Save status",
+                    on_press=self.savestatmake
                 )
             ])
-        
-        statmakewin.show()
+        self.statmakewin.show()
+    # Command to save a created status
+    async def savestatmake(self, widget):
+        filecontents = [
+            self.dinput.value,
+            self.sinput.value,
+            self.liinput.value,
+            self.ltinput.value,
+            self.siinput.value,
+            self.stinput.value]
+        filename = self.ninput.value + ".txt"
+        path = self.paths.data / filename
+        try:
+            with open(path, "w") as f:
+                f.write("\n".join(filecontents))
+                pass
+            pass
+        except Exception as e:
+            await self.statmakewin.dialog(
+                toga.InfoDialog(
+                    "Error",
+                    "Exception " + str(e) + " has occurred"
+                )
+            )
+        else:
+            await self.statmakewin.dialog(
+                toga.InfoDialog(
+                    "Success!",
+                    "Status file successfully created!"
+                )
+            )
     # Command to open statedit tool
     def openstatedit(self, widget):
         stateditwin = toga.Window(
