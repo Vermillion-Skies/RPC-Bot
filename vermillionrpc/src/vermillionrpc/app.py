@@ -75,7 +75,8 @@ class VermillionRPC(toga.App):
             ),
             children=[
                 toga.Button(
-                    "Start Broadcast"
+                    "Start Broadcast",
+                    on_press=self.startbroadcast
                 ),
                 toga.Button(
                     "End Broadcast",
@@ -138,6 +139,14 @@ class VermillionRPC(toga.App):
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
+    # Command to start the presence broadcast
+    async def startbroadcast(self, widget):
+        await self.main_window.dialog(
+            toga.InfoDialog(
+                "Error: Broadcast not started",
+                "Broadcast code is still in development."
+            )
+        )
     # Command to make and open the preferences menu
     def openprefsmenu(self, widget):
         self.appid_input = toga.TextInput(flex=1)
