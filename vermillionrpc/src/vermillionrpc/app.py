@@ -4,6 +4,7 @@ Cross-platform Discord presence app
 import pathlib
 from pathlib import Path
 import toga
+from toga.sources import ListSource
 from toga.style.pack import COLUMN, ROW, CENTER, Pack
 from toga.constants import Direction
 from toga.command import Group
@@ -26,12 +27,11 @@ class VermillionRPC(toga.App):
             children=[
                 toga.Label(
                     "Saved Statuses"
-                ),
-                toga.Label(
-                    "File One"
                 )
             ]
         )
+        # Get status files from app data directory
+        datadir = self.paths.data
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
             style=Pack(
@@ -185,7 +185,7 @@ class VermillionRPC(toga.App):
             ],
         )
         # Checks if the app ID config exists. If so, sets the value of appid_input to the inputted ID
-        path = self.paths.data / "appid.toml"
+        path = self.paths.config / "appid.toml"
         if not path.exists():
             pass
         else:
@@ -195,7 +195,7 @@ class VermillionRPC(toga.App):
         prefswindow.show()
     # Command to save your settings to local appdata folder
     def savesettings(self, widget):
-        path = self.paths.data / "appid.toml"
+        path = self.paths.config / "appid.toml"
         path.write_text(
             self.appid_input.value, 
             encoding='utf-8'
