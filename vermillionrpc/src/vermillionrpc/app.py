@@ -25,6 +25,7 @@ class VermillionRPC(toga.App):
         global contentlt
         global contentsi
         global contentst
+        self.RPCRun = "0"
         # Declares window title and existence
         self.main_window = toga.MainWindow(
             title=self.formal_name)
@@ -164,6 +165,37 @@ class VermillionRPC(toga.App):
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
+    # Commands to run the Discord RPC broadcast
+    async def on_running(self):
+        while True:
+            if self.RPCRun == "1":
+                pass
+            elif self.RPCRun == "2":
+                pass
+            else:
+                await asyncio.sleep(1)
+    def startbroadcast(self):
+        try:
+            path = self.paths.config / "appid.toml"
+            if not path.exists():
+                self.errorcode = "No app ID found. Please define one in preferences"
+                self.errortype = "0"
+                self.crashwindow()
+            else:
+                self.appid = path.read_text(encoding="utf-8")
+                startbroadbutton.enabled = False
+                endbroadbutton.enabled = True
+                self.RPCRun = "1"
+        except Exception as e:
+            self.errorcode = str(e)
+            self.errortype = "1"
+            self.crashwindow()
+        pass
+    def endbroadcast(self):
+        startbroadbutton.enabled = True
+        endbroadbutton.enabled = False
+        self.RPCRun = "2"
+        pass
     # Command to manage file selection
     def filechanged(self, widget):
         selectedfile = self.filetable.selection
@@ -249,69 +281,21 @@ class VermillionRPC(toga.App):
                 self.crashwindow()
     # Command for showing an error window
     async def crashwindow(self, widget):
-        if self.errorcode == "1":
-            errortext = "Failed to start RPC: No appID found"
         if self.errortype == "0":
             await self.main_window.dialog(
                 toga.InfoDialog(
                     "Error (non-fatal)",
-                    errortext
+                    self.errorcode
                 )
             )
         elif self.errortype == "1":
             await self.main_window.dialog(
                 toga.InfoDialog(
                     "Error (fatal)",
-                    errortext
+                    self.errorcode
                 )
             )
             quit()
-    # Command to start the RPC thread
-    async def startbroadcast(self, widget):
-        task = asyncio.create_task(self.broadcastthread())
-        await task
-        #thread = threading.Thread(target=self.broadcastthread)
-        #tracemalloc.start()
-        #thread.run()
-    # Command to start the presence broadcast
-    async def broadcastthread(self):
-        startbroadbutton.enabled = False
-        endbroadbutton.enabled = True
-        path = self.paths.config / "appid.toml"
-        if not path.exists():
-            self.errorcode = "1"
-            self.errortype = "0"
-            self.crashwindow()
-        else:
-            appid = path.read_text(
-                encoding="utf-8")
-            RPC = Presence(appid)
-            try:
-                RPC.connect()
-                starttime = time.time()
-                try:
-                    RPC.update(
-                        details=self.contentd.value,
-                        state=self.contents.value,
-                        large_image=self.contentli.value,
-                        large_text=self.contentlt.value,
-                        small_image=self.contentsi.value,
-                        small_text=self.contentst.value,
-                        start=starttime
-                    )
-                except Exception as e:
-                    print(str(e))
-            except Exception as e:
-                print(str(e))
-    # Command to end the presence broadcast
-    async def endbroadcast(self, widget):
-        startbroadbutton.enabled = True
-        endbroadbutton.enabled = False
-        await self.main_window.dialog(
-            toga.InfoDialog(
-                "Error: Broadcast not ended",
-                "Broadcast code is still in development"
-            ))
     # Command to make and open the preferences menu
     def openprefsmenu(self, widget):
         self.appid_input = toga.TextInput(flex=1)
