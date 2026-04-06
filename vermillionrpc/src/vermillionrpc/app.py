@@ -40,22 +40,23 @@ class VermillionRPC(toga.App):
         # Make a table with contents of app data folder
         datadir = self.paths.data
         files = os.listdir(datadir)
-        table = toga.Table(
+        self.filetable = toga.Table(
             headings=[
                 "Files"
             ],
             accessors={
                 "file"
             },
+            on_select=self.filechanged
         )
         for item in files:
-            table.data.append(
+            self.filetable.data.append(
                 {
                     "file": item
                 }
             )
         filecol.add(
-            table
+            self.filetable
         )
         # Column to show status file contents, as well as broadcast status
         contentbox = toga.Box(
@@ -72,25 +73,25 @@ class VermillionRPC(toga.App):
                     "File contents"
                 ),
             ])
-        contentd = toga.Label(
+        self.contentd = toga.Label(
             "Details")
-        contents = toga.Label(
+        self.contents = toga.Label(
             "State")
-        contentli = toga.Label(
+        self.contentli = toga.Label(
             "Large image internal code")
-        contentlt = toga.Label(
+        self.contentlt = toga.Label(
             "Large image hover text")
-        contentsi = toga.Label(
+        self.contentsi = toga.Label(
             "Small image internal code")
-        contentst = toga.Label(
+        self.contentst = toga.Label(
             "Small image hover text")
         contentbox.add(
-            contentd,
-            contents,
-            contentli,
-            contentlt,
-            contentsi,
-            contentst)
+            self.contentd,
+            self.contents,
+            self.contentli,
+            self.contentlt,
+            self.contentsi,
+            self.contentst)
         startbroadbutton = toga.Button(
             "Start Broadcast",
             on_press=self.startbroadcast,
@@ -161,6 +162,23 @@ class VermillionRPC(toga.App):
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
+    # Command to manage file selection
+    def filechanged(self, widget):
+        selectedfile = self.filetable.selection
+        path = self.paths.data / selectedfile.file
+        entrylist = []
+        try:
+            with open(path, "r") as file:
+                entrylist = [line.strip() for line in file]
+        except:
+            pass
+        print(entrylist)
+        self.contentd.text = entrylist[0]
+        self.contents.text = entrylist[1]
+        self.contentli.text = entrylist[2]
+        self.contentlt.text = entrylist[3]
+        self.contentsi.text = entrylist[4]
+        self.contentst.text = entrylist[5]
     # Command to start the presence broadcast
     async def startbroadcast(self, widget):
         startbroadbutton.enabled = False
