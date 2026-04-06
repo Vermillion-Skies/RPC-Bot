@@ -13,7 +13,6 @@ import pypresence
 from pypresence import Presence
 import asyncio
 import threading
-import tracemalloc
 import time
 class VermillionRPC(toga.App):
     def startup(self):
@@ -171,10 +170,17 @@ class VermillionRPC(toga.App):
             if self.RPCRun == "1":
                 pass
             elif self.RPCRun == "2":
-                pass
+                try:
+                    self.RPC.clear()
+                    self.RPC.close()
+                    pass
+                except Exception as e:
+                    self.errorcode = str(e)
+                    self.errortype = "1"
+                    self.crashwindow()
             else:
                 await asyncio.sleep(1)
-    def startbroadcast(self):
+    def startbroadcast(self, widget):
         try:
             path = self.paths.config / "appid.toml"
             if not path.exists():
@@ -183,6 +189,7 @@ class VermillionRPC(toga.App):
                 self.crashwindow()
             else:
                 self.appid = path.read_text(encoding="utf-8")
+                self.RPC = Presence(appid)
                 startbroadbutton.enabled = False
                 endbroadbutton.enabled = True
                 self.RPCRun = "1"
@@ -280,7 +287,7 @@ class VermillionRPC(toga.App):
                 self.crashcode = "0"
                 self.crashwindow()
     # Command for showing an error window
-    async def crashwindow(self, widget):
+    async def crashwindow(self):
         if self.errortype == "0":
             await self.main_window.dialog(
                 toga.InfoDialog(
