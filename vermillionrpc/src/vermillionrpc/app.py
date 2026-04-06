@@ -10,6 +10,8 @@ from toga.command import Group
 
 class VermillionRPC(toga.App):
     def startup(self):
+        global startbroadbutton
+        global endbroadbutton
         # Declares window title and existence
         self.main_window = toga.MainWindow(title=self.formal_name)
         # Column to show status files
@@ -64,6 +66,16 @@ class VermillionRPC(toga.App):
                 )
             ]
         )
+        startbroadbutton = toga.Button(
+            "Start Broadcast",
+            on_press=self.startbroadcast,
+            enabled=True
+        )
+        endbroadbutton = toga.Button(
+            "End Broadcast",
+            on_press=self.endbroadcast,
+            enabled=False
+        )
         # Controls for the RPC broadcast
         broadcastcont = toga.Box(
             style=Pack(
@@ -74,14 +86,8 @@ class VermillionRPC(toga.App):
                 direction=COLUMN,
             ),
             children=[
-                toga.Button(
-                    "Start Broadcast",
-                    on_press=self.startbroadcast
-                ),
-                toga.Button(
-                    "End Broadcast",
-                    enabled=False
-                )
+                startbroadbutton,
+                endbroadbutton
             ]
         )
         rightsplit = toga.SplitContainer(
@@ -141,10 +147,22 @@ class VermillionRPC(toga.App):
         self.main_window.show()
     # Command to start the presence broadcast
     async def startbroadcast(self, widget):
+        startbroadbutton.enabled = False
+        endbroadbutton.enabled = True
         await self.main_window.dialog(
             toga.InfoDialog(
                 "Error: Broadcast not started",
                 "Broadcast code is still in development."
+            )
+        )
+    # Command to end the presence broadcast
+    async def endbroadcast(self, widget):
+        startbroadbutton.enabled = True
+        endbroadbutton.enabled = False
+        await self.main_window.dialog(
+            toga.InfoDialog(
+                "Error: Broadcast not ended",
+                "Broadcast code is still in development"
             )
         )
     # Command to make and open the preferences menu
