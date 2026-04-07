@@ -64,7 +64,7 @@ class VermillionRPC(toga.App):
             )
         self.filetablerefresh = toga.Button(
             "Refresh status files",
-            #on_press=self.refreshfiletable,
+            on_press=self.refreshfiletable,
             margin=5
         )
         filecol.add(
@@ -171,6 +171,18 @@ class VermillionRPC(toga.App):
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
+    # Command to refresh status file table
+    def refreshfiletable(self, widget):
+        datadir = self.paths.data
+        files = os.listdir(datadir)
+        self.filetable.data.clear()
+        for item in files:
+            self.filetable.data.append(
+                {
+                    "file": item
+                }
+            )
+        
     # Commands to run the Discord RPC broadcast
     def startbroadcast(self, widget):
         rpcthread = threading.Thread(target=self.broadlogicst, daemon=True)
