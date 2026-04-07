@@ -193,7 +193,7 @@ class VermillionRPC(toga.App):
         self.RPC = Presence(self.appid)
         self.task_queue = Queue()
         self.stop_event = threading.Event()
-        self.rpcthread2 = threading.Thread(target=self.RPChandler, args=(self.task_queue, self.stop_event,), daemon=True)
+        self.rpcthread2 = threading.Thread(target=self.RPChandler, args=(self.task_queue, self.stop_event,), daemon=False)
         self.rpcthread2.start()
         startbroadbutton.enabled = False
         endbroadbutton.enabled = True
@@ -212,20 +212,23 @@ class VermillionRPC(toga.App):
                 }
             ]
         ))
+        
     def RPChandler(self, q, s):
-        while not s.is_set():
+        try:
             while True:
                 task = q.get()
                 if task is None:
                     break
                 task()
                 q.task_done()
-        self.RPC.clear()
-        self.RPC.close()
+        except:
+            self.RPC.clear()
+            self.RPC.close()
     async def endbroadcast(self, widget):
         startbroadbutton.enabled = True
         endbroadbutton.enabled = False
-        #self.task_queue.shutdown(immediate=True)
+        self.task_queue.shutdown(immediate=True)
+        self.rpcthread2.join()
     # Command to manage file selection
     def filechanged(self, widget):
         selectedfile = self.filetable.selection
