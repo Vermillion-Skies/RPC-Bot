@@ -107,7 +107,7 @@ class VermillionRPC(toga.App):
         startbroadbutton = toga.Button(
             "Start Broadcast",
             on_press=self.startbroadcast,
-            enabled=True,
+            enabled=False,
             flex=0)
         endbroadbutton = toga.Button(
             "End Broadcast",
@@ -203,6 +203,7 @@ class VermillionRPC(toga.App):
             self.refreshfiletable()
         else:
             pass
+        startbroadbutton.enabled=False
     # Command to refresh status file table
     def refreshfiletable(self, widget=None):
         datadir = self.paths.data
@@ -280,6 +281,7 @@ class VermillionRPC(toga.App):
         selectedfile = self.filetable.selection
         path = self.paths.data / selectedfile.file
         self.entrylist = []
+        startbroadbutton.enabled=True
         try:
             with open(path, "r") as file:
                 self.entrylist = [line.strip() for line in file]
