@@ -163,16 +163,39 @@ class VermillionRPC(toga.App):
             tooltip="Edit an existing status file",
             group=mgstat,
             order=2)
+        # Command to reset all files in the statuses directory
+        statresetcmd = toga.Command(
+            self.resetstatuses,
+            text="Reset saved stauses",
+            tooltip="Erase all saved status files",
+            group=mgstat,
+            order=3)
         self.commands.add(
             prefs_menu,
             statmake_menu,
-            statedit_menu)
+            statedit_menu,
+            statresetcmd)
         main_box = toga.Box()
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
+    # Command to reset all files in statuses directory
+    async def resetstatuses(self, widget):
+        diag = toga.QuestionDialog(
+            title="Status reset",
+            message="Are you sure you want to erase all status files? This cannot be undone."
+        )
+        result = await self.main_window.dialog(diag)
+        if result:
+            path = Path(self.paths.data)
+            for file in path.iterdir():
+                if file.is_file():
+                    file.unlink()
+            self.refreshfiletable()
+        else:
+            pass
     # Command to refresh status file table
-    def refreshfiletable(self, widget):
+    def refreshfiletable(self, widget=None):
         datadir = self.paths.data
         files = os.listdir(datadir)
         self.filetable.data.clear()
