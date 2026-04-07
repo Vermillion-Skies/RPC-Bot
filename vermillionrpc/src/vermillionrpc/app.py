@@ -165,21 +165,6 @@ class VermillionRPC(toga.App):
         self.main_window.content = main_box
         self.main_window.show()
     # Commands to run the Discord RPC broadcast
-    async def on_running(self):
-        while True:
-            if self.RPCRun == "1":
-                pass
-            elif self.RPCRun == "2":
-                try:
-                    self.RPC.clear()
-                    self.RPC.close()
-                    pass
-                except Exception as e:
-                    self.errorcode = str(e)
-                    self.errortype = "1"
-                    self.crashwindow()
-            else:
-                await asyncio.sleep(1)
     def startbroadcast(self, widget):
         try:
             path = self.paths.config / "appid.toml"
@@ -189,14 +174,18 @@ class VermillionRPC(toga.App):
                 self.crashwindow()
             else:
                 self.appid = path.read_text(encoding="utf-8")
-                self.RPC = Presence(appid)
+                self.RPC = Presence(self.appid)
+                task = asyncio.create_task(self.RPC.connect())
+                self.background_tasks.add(task)
+                task.add_done_callback(self.background_tasks.discard)
                 startbroadbutton.enabled = False
                 endbroadbutton.enabled = True
-                self.RPCRun = "1"
         except Exception as e:
-            self.errorcode = str(e)
-            self.errortype = "1"
-            self.crashwindow()
+            print(str(e))
+            pass
+            # self.errorcode = str(e)
+            # self.errortype = "1"
+            # self.crashwindow()
         pass
     def endbroadcast(self):
         startbroadbutton.enabled = True
