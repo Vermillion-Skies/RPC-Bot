@@ -14,6 +14,7 @@ from pypresence import Presence
 import asyncio
 import threading
 import time
+from queue import Queue
 class VermillionRPC(toga.App):
     def startup(self):
         global startbroadbutton
@@ -165,20 +166,66 @@ class VermillionRPC(toga.App):
         self.main_window.content = main_box
         self.main_window.show()
     # Commands to run the Discord RPC broadcast
-    async def startbroadcast(self, widget):
-        await self.main_window.dialog(
-            toga.InfoDialog(
-                "Error",
-                "Broadcast code does not work yet."
-            )
-        )
-    async def endbroadcast(self):
-        await self.main_window.dialog(
-            toga.InfoDialog(
-                "Error",
-                "Broadcast code does not work yet."
-            )
-        )
+    def startbroadcast(self, widget):
+        rpcthread = threading.Thread(target=self.broadlogicst, daemon=True)
+        rpcthread.start()
+        rpcthread.join()
+        #await self.main_window.dialog(
+        #    toga.InfoDialog(
+        #        "Error",
+        #        "Broadcast code does not work yet."
+        #    )
+        #)
+    def broadlogicst(self):
+        print("Started task...")
+        asyncio.run(self.broadlog())
+        #await asyncio.to_thread(self.broadlog)
+        print("Task ended")
+    def broadlog(self):
+        broadlist = []
+        if self.contentd.text == "Empty Line":
+            broadlist.append("")
+        else:
+            broadlist.append(self.contentd.text)
+        path = self.paths.config / "appid.toml"
+        self.appid = path.read_text(
+            encoding="utf-8")
+        self.RPC = Presence(self.appid)
+        self.task_queue = Queue()
+        self.stop_event = threading.Event()
+        self.rpcthread2 = threading.Thread(target=self.RPChandler, args=(self.task_queue, self.stop_event,), daemon=True)
+        self.rpcthread2.start()
+        startbroadbutton.enabled = False
+        endbroadbutton.enabled = True
+        self.task_queue.put(lambda: self.RPC.connect())
+        self.task_queue.put(lambda: self.RPC.update(
+            details=self.contentd.text,
+            state=self.contents.text,
+            large_image=self.contentli.text,
+            large_text=self.contentlt.text,
+            small_image=self.contentsi.text,
+            small_text=self.contentst.text,
+            buttons=[
+                {
+                    "label": "RPC-Bot by Vermillion-Skies",
+                    "url": "https://github.com/Vermillion-Skies/RPC-Bot"
+                }
+            ]
+        ))
+    def RPChandler(self, q, s):
+        while not s.is_set():
+            while True:
+                task = q.get()
+                if task is None:
+                    break
+                task()
+                q.task_done()
+        self.RPC.clear()
+        self.RPC.close()
+    async def endbroadcast(self, widget):
+        startbroadbutton.enabled = True
+        endbroadbutton.enabled = False
+        #self.task_queue.shutdown(immediate=True)
     # Command to manage file selection
     def filechanged(self, widget):
         selectedfile = self.filetable.selection
