@@ -32,13 +32,15 @@ class VermillionRPC(toga.App):
         # Column to show status files
         filecol = toga.Box(
             style=Pack(
-                flex=1,
+                flex=0,
                 direction=COLUMN,
                 width=300
             ),
             children=[
                 toga.Label(
-                    "Saved Statuses"
+                    "Saved Statuses",
+                    margin=5,
+                    justify_content=CENTER
                 )
             ])
         # Make a table with contents of app data folder
@@ -46,7 +48,8 @@ class VermillionRPC(toga.App):
         files = os.listdir(datadir)
         self.filetable = toga.Table(
             style=Pack(
-                flex=1,
+                flex=0,
+                margin=5
             ),
             headings=[
                 "Files"
@@ -75,8 +78,8 @@ class VermillionRPC(toga.App):
         contentbox = toga.Box(
             style=Pack(
                 direction=COLUMN,
-                flex=1,
-                justify_content=CENTER,
+                flex=0,
+                margin=5
             ),
             children=[
                 toga.Label(
@@ -106,17 +109,18 @@ class VermillionRPC(toga.App):
             "Start Broadcast",
             on_press=self.startbroadcast,
             enabled=True,
-            flex=1)
+            flex=0)
         endbroadbutton = toga.Button(
             "End Broadcast",
             on_press=self.endbroadcast,
             enabled=False,
-            flex=1)
+            flex=0)
         # Controls for the RPC broadcast
         broadcastcont = toga.Box(
             style=Pack(
                 direction=COLUMN,
-                flex=1
+                flex=0,
+                margin=5
             ),
             children=[
                 startbroadbutton,
@@ -124,15 +128,19 @@ class VermillionRPC(toga.App):
             ])
         rightsplit = toga.SplitContainer(
             content=[
-                (contentbox, 8),
-                (broadcastcont, 2)
+                contentbox,
+                broadcastcont
             ],
-            direction=Direction.HORIZONTAL)
+            direction=Direction.HORIZONTAL,
+            flex=0,
+            margin=5)
         fullsplit = toga.SplitContainer(
             content=[
                 filecol,
                 rightsplit
-            ])
+            ],
+            flex=0,
+            margin=5)
         # Adds a custom settings group to the toolbar
         maingroup = Group(
             "RPC Settings", 
@@ -175,7 +183,9 @@ class VermillionRPC(toga.App):
             statmake_menu,
             statedit_menu,
             statresetcmd)
-        main_box = toga.Box()
+        main_box = toga.Box(
+            flex=0
+        )
         main_box.add(fullsplit)
         self.main_window.content = main_box
         self.main_window.show()
