@@ -62,7 +62,13 @@ class VermillionRPC(toga.App):
                     "file": item
                 }
             )
+        self.filetablerefresh = toga.Button(
+            "Refresh status files",
+            #on_press=self.refreshfiletable,
+            margin=5
+        )
         filecol.add(
+            self.filetablerefresh,
             self.filetable
         )
         # Column to show status file contents, as well as broadcast status
