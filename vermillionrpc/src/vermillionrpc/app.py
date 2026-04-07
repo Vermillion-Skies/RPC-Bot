@@ -177,10 +177,7 @@ class VermillionRPC(toga.App):
         #    )
         #)
     def broadlogicst(self):
-        print("Started task...")
         asyncio.run(self.broadlog())
-        #await asyncio.to_thread(self.broadlog)
-        print("Task ended")
     def broadlog(self):
         broadlist = []
         if self.contentd.text == "Empty Line":
@@ -212,7 +209,6 @@ class VermillionRPC(toga.App):
                 }
             ]
         ))
-        
     def RPChandler(self, q, s):
         try:
             while True:
