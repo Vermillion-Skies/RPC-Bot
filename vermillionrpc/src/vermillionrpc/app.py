@@ -165,33 +165,20 @@ class VermillionRPC(toga.App):
         self.main_window.content = main_box
         self.main_window.show()
     # Commands to run the Discord RPC broadcast
-    def startbroadcast(self, widget):
-        try:
-            path = self.paths.config / "appid.toml"
-            if not path.exists():
-                self.errorcode = "No app ID found. Please define one in preferences"
-                self.errortype = "0"
-                self.crashwindow()
-            else:
-                self.appid = path.read_text(encoding="utf-8")
-                self.RPC = Presence(self.appid)
-                task = asyncio.create_task(self.RPC.connect())
-                self.background_tasks.add(task)
-                task.add_done_callback(self.background_tasks.discard)
-                startbroadbutton.enabled = False
-                endbroadbutton.enabled = True
-        except Exception as e:
-            print(str(e))
-            pass
-            # self.errorcode = str(e)
-            # self.errortype = "1"
-            # self.crashwindow()
-        pass
-    def endbroadcast(self):
-        startbroadbutton.enabled = True
-        endbroadbutton.enabled = False
-        self.RPCRun = "2"
-        pass
+    async def startbroadcast(self, widget):
+        await self.main_window.dialog(
+            toga.InfoDialog(
+                "Error",
+                "Broadcast code does not work yet."
+            )
+        )
+    async def endbroadcast(self):
+        await self.main_window.dialog(
+            toga.InfoDialog(
+                "Error",
+                "Broadcast code does not work yet."
+            )
+        )
     # Command to manage file selection
     def filechanged(self, widget):
         selectedfile = self.filetable.selection
